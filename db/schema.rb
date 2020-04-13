@@ -10,7 +10,41 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_12_220200) do
+ActiveRecord::Schema.define(version: 2020_04_12_231827) do
+
+  create_table "bookings", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+    t.string "agenda", limit: 45
+    t.date "date"
+    t.time "start_time"
+    t.time "end_time"
+    t.integer "user_id"
+    t.integer "room_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["room_id"], name: "index_bookings_on_room_id"
+    t.index ["user_id"], name: "index_bookings_on_user_id"
+  end
+
+  create_table "notes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+    t.integer "booking_id"
+    t.text "content"
+    t.integer "prev_note"
+    t.integer "next_note"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["booking_id"], name: "index_notes_on_booking_id"
+  end
+
+  create_table "rooms", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+    t.string "building", limit: 45
+    t.string "number", limit: 15
+    t.integer "capacity", limit: 3
+    t.string "configuration", limit: 50
+    t.string "picture"
+    t.text "Avantgarde", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "first_name", limit: 25
