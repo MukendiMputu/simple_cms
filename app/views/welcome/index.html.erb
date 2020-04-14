@@ -66,19 +66,21 @@
 
           <div id="swiper">
 	          <div id="booking_panorama" class="search">
+              <% @bookings.each do |booking| %>
               <div class="card room">
                 <div >
-                  <img alt="conference room bright" class="img-small" src=""/>
-                  <a href="#"></a>
+                  <img alt="conference room <%= booking.room.number %>" class="img-small" src="<%= booking.room.picture %>"/>
+                  <a href="#"> <%= booking.room.number %></a>
                 </div>
-                <p class="room_description"></p>
+                <p class="room_description"> <%= booking.room.avantgarde %></p>
                 <p class="booking_details">
-                  <h4></h4>
-                  <span>Date:  </span><br/>
-                  <span>Time:  </span>
+                  <h4><%= booking.agenda %></h4>
+                  <span>Date:  <%= booking.date %></span><br/>
+                  <span>Time:  <%= booking.start_time %> - <%= booking.end_time %></span>
                 </p>
-                <p><span  class=""> ()</span><br /></p>
+                <p><span  class=""> (<%= booking.user.last_name %>)</span><br /></p>
               </div>
+              <% end %>
             </div>
           </div>
 
@@ -87,12 +89,14 @@
               <label for="ip_search" class="search_label"> Room: </label>
               <select id="ip_search" name="rooms">
                 <option value=""> room # </option>
-                <option value=""></option>
+                <% @rooms.each do |room| %>
+                <option value="<%= room.id %>"><%= room.number %></option>
+                <% end %>
               </select>
             </div>
             <div class="search_flex">
               <label for="booking_date" class="search_label"> Date: </label>
-              <input type="date" id="booking_date" name="reserv-start" value="" min="1999-01-01" max="2999-12-31" class="form-date"/>
+              <input type="date" id="booking_date" name="reserv-start" value="<%= Date.today %>" min="1999-01-01" max="2999-12-31" class="form-date"/>
             </div>
             <div class="search_flex">
               <label for="booking_date" class="search_label"> from: </label>
@@ -119,6 +123,7 @@
 
       <!--[ ASIDE ]-->
       <div id="aside">
+      
       </div>
 
       <!--[ FOOTER ]-->
