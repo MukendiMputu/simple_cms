@@ -6,7 +6,7 @@ class CreateRooms < ActiveRecord::Migration[6.0]
       t.integer "capacity", :limit => 3
       t.string "configuration", :limit => 50
       t.string "picture"
-      t.text "Avantgarde", :null => false
+      t.text "avantgarde", :null => false
 
       t.timestamps
     end
