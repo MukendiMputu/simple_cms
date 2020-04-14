@@ -3,6 +3,7 @@ class Booking < ApplicationRecord
     belongs_to :user
     belongs_to :room
     has_many :notes
+    has_many :invitations
 
     scope :oldest_first, lambda { order("created_at ASC") }
     scope :newest_first, lambda { order("created_at DESC") }
