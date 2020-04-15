@@ -1,10 +1,10 @@
 class UsersController < ApplicationController
 
   def create
-    @user = User.new(params[:user])
+    @user = User.new(user_params)
 
     if @user.save
-      redirect_to(new_user_path)
+      redirect_to(signin_users_path)
     else
       render(:template => 'signup')
     end
@@ -28,12 +28,15 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find(params[:id])
+    @user = User.find(user_params)
   end
 
   def update
-
-    redirect_to(:action => 'show', :id => params[:id])
+    if @user.save
+      redirect_to(:action => 'show', :id => params[:id])
+    else
+      render(:template => 'edit')
+    end
   end
 
   def delete
@@ -43,4 +46,10 @@ class UsersController < ApplicationController
   def destroy
   end 
 
+
+  private 
+
+  def user_params
+    params.require(:user).permit(:first_name, :last_name, :nickname, :email, :password)
+  end
 end

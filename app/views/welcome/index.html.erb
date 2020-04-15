@@ -9,13 +9,13 @@
   <body>
 
     <!--[ PAGE CONTAINER ]-->
-    <div id="grid">
+    <div id="grid" role="page container">
 
       <!-- [ HEADER ] -->
-      <div id="header">
+      <header id="header" role="banner">
         <div id="h_navBar">
           <div id="logo" class="float-left">
-            <h1><a id="text_logo" href="index.php" >Conference Room</a></h1>
+            <h1><%= link_to("Conference Room", root_path, :role => 'link') %></h1>
           </div>
           <div id="h_side-nav">
             <ul id="side-nav">
@@ -24,7 +24,11 @@
             </ul>
           </div>
         </div>
-      </div>
+        <!--[ BANNER ]-->
+        <div id="banner">
+          <img alt="Banner picture of our premium conference room" src="/app/assets/images/conference_premium.jpg">
+        </div>
+      </header>
 
       <!--[ LOGIN ]-->
       <div id="login_main">
@@ -45,11 +49,6 @@
         </div>
       </div>
 
-      <!--[ BANNER ]-->
-      <div id="banner">
-        <img alt="" src="/app/assets/images/conference_premium.jpg">
-      </div>
-
       <!--[ MAIN CONTENT ]-->
       <div id="section">
         <div id="main_pane">
@@ -67,7 +66,7 @@
               <% @bookings.each do |booking| %>
               <div class="card room">
                 <div >
-                  <img alt="conference room <%= booking.room.number %>" class="img-small" src="<%= booking.room.picture %>"/>
+                  <img alt="conference room number <%= booking.room.number %>" class="img-small" src="<%= booking.room.picture %>"/>
                   <%= link_to(booking.room.number, '#') %>
                 </div>
                 <p class="room_description"> <%= booking.room.avantgarde %></p>
@@ -120,12 +119,12 @@
       </div>
 
       <!--[ ASIDE ]-->
-      <div id="aside">
+      <aside id="aside">
 
-      </div>
+      </aside>
 
       <!--[ FOOTER ]-->
-      <div id="footer">
+      <footer id="footer">
         <div id="f_wrapper">
           <div id="f_map" class="f_box">
             <h3>Location</h3><br/>
@@ -144,7 +143,7 @@
               magna aliquyam erat, sed diam voluptua.</p>
           </div>
         </div>
-      </div>
+      </footer>
 
     </div>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD2oNtRhnfGNgG_yQUNmBNa1kXJnNkzzp4&callback=myMap"></script>
