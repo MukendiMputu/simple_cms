@@ -5,8 +5,6 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Conference Room | Home </title>
-    <link rel="stylesheet" type="text/css" href="../styles/styles.css"/>
-    <link rel="stylesheet" media="screen and (max-width: 414px)" href="../styles/mobiles.css"/>
   </head>
   <body>
 
@@ -22,7 +20,7 @@
           <div id="h_side-nav">
             <ul id="side-nav">
                 <li><a class="active" >Home</a></li>
-                <li><a class="btn-primary " href="signup.php#main_pane">Sign up</a></li>
+                <li><%= link_to("Sign up", signup_users_path, :class => 'btn-primary') %></li>
             </ul>
           </div>
         </div>
@@ -34,14 +32,14 @@
           <div id="err_mod_main" class="invisible modal-danger">
             <span class="label_required invisible danger">Email or password is wrong!</span>
           </div>
-          <form class="form-validate" method="post" action="index.php">
+          <form class="form-validate" method="post" action="<%= signin_users_path %>">
             <label for="loginEmail" class=""> Email Address</label>
             <input name="loginEmail" id="loginEmail" type="email" placeholder="name@address.com" data-msg="Please enter your email" class="form-control"/>
             <label for="loginPassword" class=""> Password</label>
             <input name="loginPassword" id="loginPassword" placeholder="Enter your password" type="password" data-msg="Please enter your password" class="form-control"/>
             <button type="submit" class="btn-primary medium btn-submit">Sign in</button>
             <span id="para_account" >
-              or <a href="signup.php">create a new account</a>
+              or <%= link_to("create a new account", signup_users_path) %>
             </span>
           </form>
         </div>
@@ -70,7 +68,7 @@
               <div class="card room">
                 <div >
                   <img alt="conference room <%= booking.room.number %>" class="img-small" src="<%= booking.room.picture %>"/>
-                  <a href="#"> <%= booking.room.number %></a>
+                  <%= link_to(booking.room.number, '#') %>
                 </div>
                 <p class="room_description"> <%= booking.room.avantgarde %></p>
                 <p class="booking_details">
@@ -123,7 +121,7 @@
 
       <!--[ ASIDE ]-->
       <div id="aside">
-      
+
       </div>
 
       <!--[ FOOTER ]-->

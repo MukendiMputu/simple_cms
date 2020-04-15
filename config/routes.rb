@@ -2,11 +2,16 @@ Rails.application.routes.draw do
   
   root 'welcome#index'
 
-  resources :users do
+  resources :users, :except => [:index, :new] do # :only => [:create]
     member do
-      post :signup
-      post :signin
+      post :update
+      get :signout
       get :delete
+    end
+
+    collection do
+      get :signup
+      get :signin
     end
   end
   

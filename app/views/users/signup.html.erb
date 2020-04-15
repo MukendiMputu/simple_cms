@@ -1,2 +1,76 @@
-<h1>Users#signup</h1>
-<p>Find me in app/views/users/signup.html.erb</p>
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Conference Romm | Sign up </title>
+    <link rel="stylesheet" type="text/css" href="../styles/styles.css"/>
+    <link rel="stylesheet" media="screen and (max-width: 480px)" href="../styles/mobiles.css"/>
+  </head>
+  <body>
+    <!-- container -->
+    <div id="grid">
+      <div id="header">
+        <div id="h_navBar">
+          <div id="logo" class=" float-left">
+            <h1>Conference Room</h1>
+          </div>
+          <div id="h_side-nav">
+            <ul id="side-nav">
+              <li><%= link_to('Home', root_path) %></li>
+              <li><%= link_to('Signin', signin_users_path) %></li>
+            </ul>
+          </div>
+        </div>
+      </div> <!-- end of header -->
+      <div id="banner"></div><!-- end of banner -->
+      <div id="section">
+        <div id="main_pane">
+          <div id="mp_titel" class="text-center"><h3>CREATE YOUR ACCOUNT</h3></div>
+          <div id="swiper" class="">
+		    <form name="signup_form" class="form-validate" method="post" action="<%= "#{users_path}" %>" enctype="multipart/form-data">
+                  <div id="avatar_div" class="text-center">
+                    <img id="avatar" class="img_widget" src="<%= asset_path('avatar_default.png', type: :image)%>"><br/>
+                    <label for="avatar_btn">Upload a profile picture:</label>
+                    <input type="file" id="avatar_btn" name="avatar" accept="image/png, image/jpeg, image/jpg, image/gif" style="width:fit-content;">
+                  </div>
+                  <div id="succ_mod" class="invisible modal-succes">
+                    <p class="label_required success text-center">All good!</p>
+                  </div>
+                  <div class="invisible modal-danger">
+                    <span class="label_required danger">The following errors(s) occured:</span>
+                    <ul class="error_list label_required danger">
+                        <li></li>
+                    </ul>
+                  </div>
+                  <div class="labeledInput">
+                      <label for="nickname" class="form-label"> Nickname</label><span class="label_required danger">&nbsp;*</span>
+                      <input name="nickname" id="nickname" type="text" placeholder="Choose a new nickname" value="" class="form-input"/>
+                  </div>
+                  <div class="labeledInput">
+                      <label for="email" class="form-label"> Email Address</label><span class="label_required danger">&nbsp;*</span>
+                      <input name="email" id="email" type="email" placeholder="name@address.com" class="form-input" />
+                  </div>
+                  <div class="labeledInput">
+                      <label for="loginPassword" class="form-label"> Password</label><span class="label_required danger">&nbsp;*</span>
+                      <input name="loginPassword" id="loginPassword" placeholder="Enter a new password" type="password" class="form-input" />
+                  </div>
+                  <div class="labeledInput">
+                      <label for="loginPassword2" class="form-label"> Confirm your password</label><span class="label_required danger">&nbsp;*</span>
+                      <input name="loginPassword2" id="loginPassword2" placeholder="Cofirm your password" type="password" class="form-input" />
+                  </div><span style="font-size: 8pt;color: #838383;">Field marked with <span class="label_required danger">&nbsp;*</span> are required</span>
+                  <div class="text-center">
+                    <br/>
+                    <button type="submit" name="submit" class="btn-primary medium">Sign up</button><hr/>
+                    <p class="">or <%= link_to("Sign in", signin_users_path) %></p>
+                  </div>
+                  <br/>
+                  <br/>
+              </form>
+            </div><!-- end of event pane -->
+        </div> <!-- end of section -->
+      </div> <!-- end of container -->
+    </div>
+</body>
+</html>
