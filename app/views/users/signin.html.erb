@@ -27,9 +27,9 @@
         <div id="main_pane">
           <div id="mp_titel" class="text-center"><h3>LOGIN</h3></div>
             <div class="panes">
-					          <div id="err_mod" class="<?php echo $authenticated ? ' invisible ' : ' visible '; ?> modal-danger">
-						<span class="label_required danger">Email or password is wrong!</span>
-					</div>
+					    <div id="err_mod" class="<?php echo $authenticated ? ' invisible ' : ' visible '; ?> modal-danger">
+						    <span class="label_required danger"><%= flash[:notice] %></span>
+					    </div>
                 <div id="login" class="">
                     <form class="form-validate" method="POST" action="signin.php">
                         <div class="labeledInput">

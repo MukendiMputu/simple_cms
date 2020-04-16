@@ -9,15 +9,15 @@
   <body>
 
     <!--[ PAGE CONTAINER ]-->
-    <div id="grid" role="main" aria-label="page container">
+    <main id="grid" aria-label="page container">
 
       <!-- [ HEADER ] -->
       <header id="header" aria-label="webpage banner">
-        <div id="h_navBar">
-          <div id="logo" class="float-left">
+        <div id="h_navBar" >
+          <div id="logo" class="float-left" aria-label="page logo">
             <h1><%= link_to("Conference Room", root_path, :role => 'link') %></h1>
           </div>
-          <div id="h_side-nav">
+          <div id="h_side-nav" aria-label="main navigation">
             <nav id="side-nav">
                 <a class="active" >Home</a> |
                 <%= link_to("Sign up", signup_users_path, :class => 'btn-primary') %>
@@ -25,127 +25,119 @@
           </div>
         </div>
         <!--[ BANNER ]-->
-        <div id="banner">
-          <img alt="Banner picture of our premium conference room" src="/app/assets/images/conference_premium.jpg">
-        </div>
+        <!-- the picture allows much more options -->
+        <picture id="banner_picture" role="img" aria-label="banner picture">
+          <source media="(min-width:600px)" srcset="<%= asset_path('landscapes/480/conference_brown-480x1920.jpg', type: :image) %>">
+          <img src="<%= asset_path('landscapes/480/conference_brown-480x1920.jpg', type: :image) %>" alt="Banner picture of our premium conference room">
+        </picture>
       </header>
 
       <!--[ LOGIN ]-->
       <div id="login_main" aria-label="login pane">
         <div id="login" >
           <div id="err_mod_main" class="invisible modal-danger">
-            <span class="label_required invisible danger">Email or password is wrong!</span>
+            <span class="label_required invisible danger"><%= flash[:notice] %></span>
           </div>
-          <form class="form-validate" method="post" action="<%= signin_users_path %>">
-            <label for="loginEmail" class=""> Email Address</label>
-            <input name="loginEmail" id="loginEmail" type="email" placeholder="name@address.com" data-msg="Please enter your email" class="form-control"/>
-            <label for="loginPassword" class=""> Password</label>
-            <input name="loginPassword" id="loginPassword" placeholder="Enter your password" type="password" data-msg="Please enter your password" class="form-control"/>
-            <button type="submit" class="btn-primary medium btn-submit">Sign in</button>
+          <%= form_with(:url => signin_users_path, :method => 'post', :class => 'form-validate') do |form| %>
+            <%= form.label(:email)%>
+            <%= form.email_field(:email, placeholder: "e.g. name@address.com", :class => 'form-control')%>
+            <%= form.label(:password)%>
+            <%= form.password_field(:password, placeholder: "Enter your password", :class => 'form-control')%>
+            <%= form.submit('Sign in', :class => 'btn-primary medium btn-submit') %>
             <span id="para_account" >
               or <%= link_to("create a new account", signup_users_path) %>
             </span>
-          </form>
+          <% end %>
         </div>
       </div>
 
       <!--[ MAIN CONTENT ]-->
-      <section id="section">
-        <div id="main_pane">
+      <article id="section" aria-label="main content">
+        <section id="main_pane">
           <div id="mp_titel" class="text-center">
-            <h2>Availabilities</h2>
+            <h1>Our Rooms</h1>
           </div>
+
+          <div id="swiper">
+	          <div id="room_panorama" class="search">
+              <% @rooms.each do |room| %>
+              <div class="card room">
+                <picture id="room_thumbnail" role="img" aria-label="room thumbnail">
+                  <source media="(min-width:600px)" srcset="<%= asset_path("480/#{room.picture}", type: :image) %>">
+                          <img alt="conference room number <%= room.number %>" class="img-small" src="<%= asset_path("480/#{room.picture}", type: :image) %>"/>
+                </picture>
+                <p class="room_description"> <%= room.avantgarde %></p>
+                <p class="room_details">
+                  <h4><%= room.building %></h4>
+                  <span>Configuration:  <%= room.configuration %></span><br/>
+                  <span>Capacity:  <%= room.capacity %></span>
+                </p>
+                <p><span  class=""><%= link_to('View more', '#') %></span><br /></p>
+              </div>
+              <% end %>
+            </div>
+          </div>
+        </section>
+        <section class="search">
+          <h1>Availabilities</h1>
           <div id="date_picker" class="text-center">
             <span id="dp_date">
               <span id="day"></span> <span id="month">Jan</span>. <span id="date">20</span><sup id="ordinal">th</sup> <span id="year">2020</span>
             </span>
           </div>
-
-          <div id="swiper">
-	          <div id="booking_panorama" class="search">
-              <% @bookings.each do |booking| %>
-              <div class="card room">
-                <div >
-                  <img alt="conference room number <%= booking.room.number %>" class="img-small" src="<%= booking.room.picture %>"/>
-                  <%= link_to(booking.room.number, '#') %>
-                </div>
-                <p class="room_description"> <%= booking.room.avantgarde %></p>
-                <p class="booking_details">
-                  <h4><%= booking.agenda %></h4>
-                  <span>Date:  <%= booking.date %></span><br/>
-                  <span>Time:  <%= booking.start_time %> - <%= booking.end_time %></span>
-                </p>
-                <p><span  class=""> (<%= booking.user.last_name %>)</span><br /></p>
-              </div>
+          <div class="search_flex">
+            <label for="ip_search" class="search_label"> Room: </label>
+            <select id="ip_search" name="rooms">
+              <option value=""> room # </option>
+              <% @rooms.each do |room| %>
+              <option value="<%= room.id %>"><%= room.number %></option>
               <% end %>
-            </div>
+            </select>
           </div>
-
-          <div class="search">
-            <div class="search_flex">
-              <label for="ip_search" class="search_label"> Room: </label>
-              <select id="ip_search" name="rooms">
-                <option value=""> room # </option>
-                <% @rooms.each do |room| %>
-                <option value="<%= room.id %>"><%= room.number %></option>
-                <% end %>
-              </select>
-            </div>
-            <div class="search_flex">
-              <label for="booking_date" class="search_label"> Date: </label>
-              <input type="date" id="booking_date" name="reserv-start" value="<%= Date.today %>" min="1999-01-01" max="2999-12-31" class="form-date"/>
-            </div>
-            <div class="search_flex">
-              <label for="booking_date" class="search_label"> from: </label>
-              <input type="time" id="start_time" name="time-start" value="06:00" min="06:00" max="22:00" step="1800" class="form-date"/>
-            </div>
-            <div class="search_flex">
-              <label for="booking_date" class="search_label"> to: </label>
-              <input type="time" id="end_time" name="time-end" value="22:00" min="06:00" max="22:00" step="1800" class="form-date"/>
-            </div>
-            <div>
-              <input type="submit" value="&#x1F50D;" class="circled-button"/>
-            </div>
+          <div class="search_flex">
+            <label for="booking_date" class="search_label"> Date: </label>
+            <input type="date" id="booking_date" name="reserv-start" value="<%= Date.today %>" min="1999-01-01" max="2999-12-31" class="form-date"/>
           </div>
-
-        </div><!-- end of main_pane -->
-
-
-        <!-- Ruby Test Pane -->
-        <div id="php_testPane">
-        
-        </div>
-
-      </section>
+          <div class="search_flex">
+            <label for="booking_date" class="search_label"> from: </label>
+            <input type="time" id="start_time" name="time-start" value="06:00" min="06:00" max="22:00" step="1800" class="form-date"/>
+          </div>
+          <div class="search_flex">
+            <label for="booking_date" class="search_label"> to: </label>
+            <input type="time" id="end_time" name="time-end" value="22:00" min="06:00" max="22:00" step="1800" class="form-date"/>
+          </div>
+          <div>
+            <input type="submit" value="&#x1F50D;" class="circled-button"/>
+          </div>
+        </section>
+      </article>
 
       <!--[ ASIDE ]-->
-      <aside id="aside">
+      <aside id="aside" aria-label="events pane">
 
       </aside>
-
-      <!--[ FOOTER ]-->
-      <footer id="footer">
-        <div id="f_wrapper">
-          <div id="f_map" class="f_box">
-            <h3>Location</h3><br/>
-            <div id="googleMap"></div>
-          </div>
-          <div id="f_cont" class="f_box">
-            <h3>Contact</h3>
-            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
-              sed diam nonumy eirmod tempor invidunt ut labore et dolore
-              magna aliquyam erat, sed diam voluptua.</p>
-          </div>
-          <div id="f_impr" class="f_box">
-            <h3>Impresum</h3>
-            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
-              sed diam nonumy eirmod tempor invidunt ut labore et dolore
-              magna aliquyam erat, sed diam voluptua.</p>
-          </div>
+    </main>
+    <!--[ FOOTER ]-->
+    <footer id="footer" aria-label="page footer">
+      <div id="f_wrapper" >
+        <div id="f_map" class="f_box" aria-label="company location">
+          <h1>Location</h1><br/>
+          <div id="googleMap"></div>
         </div>
-      </footer>
-
-    </div>
+        <div id="f_cont" class="f_box" aria-label="company conta">
+          <h1>Contact</h1>
+          <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
+            sed diam nonumy eirmod tempor invidunt ut labore et dolore
+            magna aliquyam erat, sed diam voluptua.</p>
+        </div>
+        <div id="f_impr" class="f_box" aria-label="company location">
+          <h1>Impresum</h1>
+          <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
+            sed diam nonumy eirmod tempor invidunt ut labore et dolore
+            magna aliquyam erat, sed diam voluptua.</p>
+        </div>
+      </div>
+    </footer>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD2oNtRhnfGNgG_yQUNmBNa1kXJnNkzzp4&callback=myMap"></script>
   </body>
 </html>

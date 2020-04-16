@@ -4,6 +4,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
+      flash[:notice] = "Account created successfully."
       redirect_to(signin_users_path)
     else
       render(:template => 'signup')
@@ -16,6 +17,7 @@ class UsersController < ApplicationController
   end
 
   def signin
+    
   end
 
   def signout
@@ -28,11 +30,12 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find(user_params)
+    @user = User.find(params[:id])
   end
 
   def update
-    if @user.save
+    if @user.update(user_params)
+      flash[:notice] = "Account created successfully."
       redirect_to(:action => 'show', :id => params[:id])
     else
       render(:template => 'edit')
@@ -44,6 +47,7 @@ class UsersController < ApplicationController
   end
 
   def destroy
+      flash[:notice] = "Account destroyed successfully."
   end 
 
 

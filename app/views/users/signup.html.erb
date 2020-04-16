@@ -32,49 +32,50 @@
                 <div id="main_pane">
                 <div id="mp_titel" class="text-center"><h3>CREATE YOUR ACCOUNT</h3></div>
                 <div id="swiper" class="">
-                <%= form_with(:url => users_path, :method => 'post', :class => 'form-validate', :multipart => true) do %>
+                <%= form_with(:model => @user, :url => users_path, :method => 'post', :class => 'form-validate', :multipart => true) do %>
                     <div id="avatar_div" class="text-center">
-                    <img id="avatar" class="img_widget" src="<%= asset_path('avatar_default.png', type: :image)%>"><br/>
-                    <%= label_tag(:picture, "Upload a profile picture: ") %>
-                    <%= file_field_tag(:picture) %>
+                        <img id="avatar" class="img_widget" src="<%= asset_path('avatar_default.png', type: :image)%>"><br/>
+                        <%= label_tag(:picture, "Upload a profile picture: ") %>
+                        <%= file_field_tag(:picture) %>
                     </div>
                     <div id="succ_mod" class="invisible modal-succes">
-                    <p class="label_required success text-center">All good!</p>
+                        <p class="label_required success text-center">All good!</p>
                     </div>
                     <div class="invisible modal-danger">
-                    <span class="label_required danger">The following errors(s) occured:</span>
-                    <ul class="error_list label_required danger">
-                    <li></li>
-                    </ul>
+                        <span class="label_required danger">The following errors(s) occured:</span>
+                        <ul class="error_list label_required danger">
+                            <li></li>
+                        </ul>
                     </div>
                     <div class="labeledInput">
-                    <%= label_tag(:first_name, "First Name:") %><span class="label_required danger">&nbsp;*</span>
-                    <%= text_field_tag(:first_name) %>
+                        <%= label_tag(:first_name, "First Name:") %><span class="label_required danger">&nbsp;*</span>
+                        <%= text_field_tag(:first_name) %>
                     </div>
                     <div class="labeledInput">
-                    <%= label_tag(:last_name, "Last Name:") %><span class="label_required danger">&nbsp;*</span>
-                    <%= text_field_tag(:last_name) %>
+                        <%= label_tag(:last_name, "Last Name:") %><span class="label_required danger">&nbsp;*</span>
+                        <%= text_field_tag(:last_name) %>
                     </div>
                     <div class="labeledInput">
-                    <%= label_tag(:nickname, "Nickname:") %><span class="label_required danger">&nbsp;*</span>
-                    <%= text_field_tag(:nickname) %>
+                        <%= label_tag(:nickname, "Nickname:") %><span class="label_required danger">&nbsp;*</span>
+                        <%= text_field_tag(:nickname) %>
                     </div>
                     <div class="labeledInput">
-                    <%= label_tag(:email, "Email Address:") %><span class="label_required danger">&nbsp;*</span>
-                    <%= text_field_tag(:email) %>
+                        <%= label_tag(:email, "Email Address:") %><span class="label_required danger">&nbsp;*</span>
+                        <%= text_field_tag(:email) %>
                     </div>
                     <div class="labeledInput">
-                    <%= label_tag(:password, "Password:") %><span class="label_required danger">&nbsp;*</span>
-                    <%= text_field_tag(:password) %>
+                        <%= label_tag(:password, "Password:") %><span class="label_required danger">&nbsp;*</span>
+                        <%= text_field_tag(:password) %>
                     </div>
                     <div class="labeledInput">
-                    <%= label_tag(:confirm_pwd, "Confirm your password:") %><span class="label_required danger">&nbsp;*</span>
-                    <%= text_field_tag(:confirm_pwd) %>
-                    </div><span style="font-size: 8pt;color: #838383;">Field marked with <span class="label_required danger">&nbsp;*</span> are required</span>
+                        <%= label_tag(:confirm_pwd, "Confirm your password:") %><span class="label_required danger">&nbsp;*</span>
+                        <%= text_field_tag(:confirm_pwd) %>
+                    </div>
+                    <span style="font-size: 8pt;color: #838383;">Field marked with <span class="label_required danger">&nbsp;*</span> are required</span>
                     <div class="text-center">
-                    <br/>
-                    <%= submit_tag('Sign up') %><hr />
-                    <p class="">or <%= link_to("Sign in", signin_users_path) %></p>
+                        <br/>
+                        <%= submit_tag('Sign up') %><hr />
+                        <p class="">or <%= link_to("Sign in", signin_users_path) %></p>
                     </div>
                     <br/>
                     <br/>
