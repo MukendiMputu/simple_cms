@@ -7,31 +7,11 @@
     <title>Conference Room | Home </title>
   </head>
   <body>
-
-    <!--[ PAGE CONTAINER ]-->
-    <main id="grid" aria-label="page container">
-
-      <!-- [ HEADER ] -->
-      <header id="header" aria-label="webpage banner">
-        <div id="h_navBar" >
-          <div id="logo" class="float-left" aria-label="page logo">
-            <h1><%= link_to("Conference Room", root_path, :role => 'link') %></h1>
-          </div>
-          <div id="h_side-nav" aria-label="main navigation">
-            <nav id="side-nav">
-                <a class="active" >Home</a> |
-                <%= link_to("Sign up", signup_users_path, :class => 'btn-primary') %>
-            </nav>
-          </div>
-        </div>
-        <!--[ BANNER ]-->
-        <!-- the picture allows much more options -->
-        <picture id="banner_picture" role="img" aria-label="banner picture">
-          <source media="(min-width:600px)" srcset="<%= asset_path('landscapes/480/conference_brown-480x1920.jpg', type: :image) %>">
-          <img src="<%= asset_path('landscapes/480/conference_brown-480x1920.jpg', type: :image) %>" alt="Banner picture of our premium conference room">
-        </picture>
-      </header>
-
+    <!-- [ HEADER ] -->
+    <header id="header" aria-label="page banner">
+      <div id="page_heading" class="float-left" aria-label="page heading">
+        <h1><%= link_to("Conference Room", root_path, :role => 'link') %></h1>
+      </div>
       <!--[ LOGIN ]-->
       <div id="login_main" aria-label="login pane">
         <div id="login" >
@@ -45,12 +25,29 @@
             <%= form.password_field(:password, placeholder: "Enter your password", :class => 'form-control')%>
             <%= form.submit('Sign in', :class => 'btn-primary medium btn-submit') %>
             <span id="para_account" >
-              or <%= link_to("create a new account", signup_users_path) %>
+              or <%= link_to("Sign up", signup_users_path, :class => 'btn-primary') %>
             </span>
           <% end %>
         </div>
       </div>
-
+      <!--[ BANNER ]-->
+      <!-- the picture allows much more options -->
+      <picture id="banner_picture" role="img" aria-label="banner picture">
+        <source media="(min-width:600px)" srcset="<%= asset_path('landscapes/480/conference_brown-480x1920.jpg', type: :image) %>">
+        <%= image_tag('landscapes/480/conference_brown-480x1920.jpg', :size => '1920x480', :alt => "Banner picture of our premium conference room") %>
+      </picture>
+    </header>
+    <nav class="crumbs" aria-label="navigation menu">
+      <ul aria-label="navigation options">
+        <li><%= link_to("Home", "#") %></li>
+        <li><%= link_to("Services", "#") %></li>
+        <li><%= link_to("About", "#") %></li>
+        <li><%= link_to("Contact", "#") %></li>
+      </ul>
+    </nav>
+    <!--[ PAGE CONTAINER ]-->
+    <main id="grid" aria-label="page container">
+      <% @page_title = 'Home' %>
       <!--[ MAIN CONTENT ]-->
       <article id="section" aria-label="main content">
         <section id="main_pane">
@@ -66,7 +63,7 @@
                   <source media="(min-width:600px)" srcset="<%= asset_path("480/#{room.picture}", type: :image) %>">
                           <img alt="conference room number <%= room.number %>" class="img-small" src="<%= asset_path("480/#{room.picture}", type: :image) %>"/>
                 </picture>
-                <p class="room_description"> <%= room.avantgarde %></p>
+                <p class="room_description"> <%= truncate(room.avantgarde, :length => 150, :separator => ' ') %></p>
                 <p class="room_details">
                   <h4><%= room.building %></h4>
                   <span>Configuration:  <%= room.configuration %></span><br/>
@@ -82,7 +79,7 @@
           <h1>Availabilities</h1>
           <div id="date_picker" class="text-center">
             <span id="dp_date">
-              <span id="day"></span> <span id="month">Jan</span>. <span id="date">20</span><sup id="ordinal">th</sup> <span id="year">2020</span>
+              <span id="day"></span> <span id="month"><%= Time.now %></span> <span id="date">20</span><sup id="ordinal">th</sup> <span id="year">2020</span>
             </span>
           </div>
           <div class="search_flex">
@@ -121,17 +118,17 @@
     <footer id="footer" aria-label="page footer">
       <div id="f_wrapper" >
         <div id="f_map" class="f_box" aria-label="company location">
-          <h1>Location</h1><br/>
+          <h2>Location</h2><br/>
           <div id="googleMap"></div>
         </div>
         <div id="f_cont" class="f_box" aria-label="company conta">
-          <h1>Contact</h1>
+          <h2>Contact</h2>
           <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
             sed diam nonumy eirmod tempor invidunt ut labore et dolore
             magna aliquyam erat, sed diam voluptua.</p>
         </div>
         <div id="f_impr" class="f_box" aria-label="company location">
-          <h1>Impresum</h1>
+          <h2>Impresum</h2>
           <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
             sed diam nonumy eirmod tempor invidunt ut labore et dolore
             magna aliquyam erat, sed diam voluptua.</p>
