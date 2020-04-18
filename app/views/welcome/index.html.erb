@@ -31,11 +31,33 @@
         </div>
       </div>
       <!--[ BANNER ]-->
-      <!-- the picture allows much more options -->
-      <picture id="banner_picture" role="img" aria-label="banner picture">
-        <source media="(min-width:600px)" srcset="<%= asset_path('landscapes/480/conference_brown-480x1920.jpg', type: :image) %>">
-        <%= image_tag('landscapes/480/conference_brown-480x1920.jpg', :size => '1920x480', :alt => "Banner picture of our premium conference room") %>
-      </picture>
+      <!--[ Carousel ]-->
+      <div id="banner" class="carousel slide" data-ride="carousel" role="img" aria-label="banner picture">
+        <ol class="carousel-indicators">
+          <% @rooms.each do |room| %>
+          <li data-target="#carouselExampleCaptions" data-slide-to="<%= room.id %>" class="<%= room.id == 1 ? 'active' : '' %>"></li>
+          <% end %>
+        </ol>
+        <div class="carousel-inner">
+          <% @rooms.each do |room| %>
+          <div class="carousel-item <%= room.id == 1 ? ' active' : '' %>">
+             <%= image_tag("landscapes/480/#{room.picture}", :class =>"d-block w-100", :height => '480', :style => 'width:100%', :alt => "Banner picture of #{room.name}") %>
+            <div class="carousel-caption d-none d-md-block">
+              <h5><%= room.name %></h5>
+              <p><%= truncate(room.avantgarde, :length => 76, :separator => ' ')%></p>
+            </div>
+          </div>
+          <% end %>
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
     </header>
     <nav class="crumbs" aria-label="navigation menu">
       <ul aria-label="navigation options">
@@ -45,6 +67,7 @@
         <li><%= link_to("Contact", "#") %></li>
       </ul>
     </nav>
+    <hr />
     <!--[ PAGE CONTAINER ]-->
     <main id="grid" aria-label="page container">
       <% @page_title = 'Home' %>
@@ -78,33 +101,47 @@
         <section class="search">
           <h1>Availabilities</h1>
           <div id="date_picker" class="text-center">
-            <span id="dp_date">
-              <span id="day"></span> <span id="month"><%= Time.now %></span> <span id="date">20</span><sup id="ordinal">th</sup> <span id="year">2020</span>
-            </span>
+            <%= time_tag(Date.today, :id => 'dp_date') %>
+          </div>
+          <%= form_with(:url => {:action => :search_booking}, :method => "post") do %>
+          <div class="search_flex">
+            <%= label_tag(:number, 'Room:', :class => 'search_label') %>
+            <%= select_tag(:number, options_for_select(@rooms.map{|r| [r.number, r.id]}), {:include_blank => true}) %>
           </div>
           <div class="search_flex">
-            <label for="ip_search" class="search_label"> Room: </label>
-            <select id="ip_search" name="rooms">
-              <option value=""> room # </option>
-              <% @rooms.each do |room| %>
-              <option value="<%= room.id %>"><%= room.number %></option>
-              <% end %>
-            </select>
+            <%= label_tag(:date, 'Date:', :class => 'search_label') %>
+            <%= date_field_tag(:date, Date.today, :min => Time.now.year-1, :max => Time.now.year+5, :class => "form-date")%>
           </div>
           <div class="search_flex">
-            <label for="booking_date" class="search_label"> Date: </label>
-            <input type="date" id="booking_date" name="reserv-start" value="<%= Date.today %>" min="1999-01-01" max="2999-12-31" class="form-date"/>
+            <%= label_tag(:start_time, 'from ', :class => 'search_label') %>
+            <%= time_field_tag(:start_time, Time.now.strftime("%H:%M"), :step => 1800, :min => "06:00", :max => "22:00", :class => "form-date") %>
           </div>
           <div class="search_flex">
-            <label for="booking_date" class="search_label"> from: </label>
-            <input type="time" id="start_time" name="time-start" value="06:00" min="06:00" max="22:00" step="1800" class="form-date"/>
-          </div>
-          <div class="search_flex">
-            <label for="booking_date" class="search_label"> to: </label>
-            <input type="time" id="end_time" name="time-end" value="22:00" min="06:00" max="22:00" step="1800" class="form-date"/>
+            <%= label_tag(:end_time, 'to ', :class => 'search_label') %>
+            <%= time_field_tag(:end_time, (Time.now.advance(hours: 6)).strftime("%H:%M"), :step => 1800, :min => "06:00", :max => "22:00", :class => "form-date") %>
           </div>
           <div>
-            <input type="submit" value="&#x1F50D;" class="circled-button"/>
+            <%= submit_tag(raw("&#x1F50D;"), :class => 'circled-button') %>
+          </div>
+          <% end %>
+          <br />
+          <div>
+	          <div id="room_panorama" class="">
+              <% @bookings.each do |booking| %>
+              <div class="card room">
+                <picture id="" role="img" aria-label="room thumbnail">
+                  <source media="(min-width:600px)" srcset="<%= asset_path("480/#{booking.room.picture}", type: :image) %>">
+                          <img alt="conference room number <%= booking.room.number %>" class="img-small" src="<%= asset_path("480/#{booking.room.picture}", type: :image) %>"/>
+                </picture>
+                <p class="room_details">
+                  <h4><%= booking.agenda %></h4>
+                  <span>Date:  <%= booking.date.to_formatted_s(:long_ordinal) %></span><br/>
+                  <span>Time:  <%= booking.start_time.to_formatted_s(:time) %> - <%= booking.end_time.to_formatted_s(:time)%></span>
+                </p>
+                <p><span  class=""><%= link_to('View more', '#') %></span><br /></p>
+              </div>
+              <% end %>
+            </div>
           </div>
         </section>
       </article>
@@ -114,6 +151,7 @@
 
       </aside>
     </main>
+    <hr />
     <!--[ FOOTER ]-->
     <footer id="footer" aria-label="page footer">
       <div id="f_wrapper" >

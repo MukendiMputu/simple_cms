@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   
   root 'welcome#index'
+  post 'welcome/search_booking'
 
   resources :users, :except => [:index, :new] do # :only => [:create]
     member do
@@ -16,8 +17,6 @@ Rails.application.routes.draw do
   end
   
   
-  
-  #get 'welcome/index'
   #get 'welcome/index' # match "welcome/index", :to => "welcome#index", :via => :get
   
   # Default route 
