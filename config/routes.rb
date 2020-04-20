@@ -3,16 +3,15 @@ Rails.application.routes.draw do
   root 'welcome#index'
   post 'welcome/search_booking'
 
-  resources :users, :except => [:index, :new] do # :only => [:create]
+  resources :users, :only => [:show, :create] do # :except => [:index, :new]
     member do
-      post :update
       get :signout
       get :delete
     end
 
     collection do
       get :signup
-      get :signin
+      post :signin
     end
   end
   

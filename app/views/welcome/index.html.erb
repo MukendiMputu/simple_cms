@@ -16,9 +16,9 @@
       <div id="login_main" aria-label="login pane">
         <div id="login" >
           <div id="err_mod_main" class="invisible modal-danger">
-            <span class="label_required invisible danger"><%= flash[:notice] %></span>
+            <span class="label_required invisible danger"><%= flash[:alert] %></span>
           </div>
-          <%= form_with(:url => signin_users_path, :method => 'post', :class => 'form-validate') do |form| %>
+          <%= form_with(:model => @user, :url => signin_users_path, :method => 'post', :class => 'form-validate') do |form| %>
             <%= form.label(:email)%>
             <%= form.email_field(:email, placeholder: "e.g. name@address.com", :class => 'form-control')%>
             <%= form.label(:password)%>
@@ -51,11 +51,9 @@
         </div>
         <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="sr-only">Previous</span>
         </a>
         <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
           <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="sr-only">Next</span>
         </a>
       </div>
     </header>
