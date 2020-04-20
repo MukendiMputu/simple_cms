@@ -1,9 +1,5 @@
 class UsersController < ApplicationController
-  
-  def signup
-    # Just shows the signup form
-  end
-  
+   
   def create
     # creates and saves the user into the DB
     if @user.new(user_params)
