@@ -31,31 +31,11 @@
         </div>
       </div>
       <!--[ BANNER ]-->
-      <!--[ Carousel ]-->
-      <div id="banner" class="carousel slide" data-ride="carousel" role="img" aria-label="banner picture">
-        <ol class="carousel-indicators">
-          <% @rooms.each do |room| %>
-          <li data-target="#carouselExampleCaptions" data-slide-to="<%= room.id %>" class="<%= room.id == 1 ? 'active' : '' %>"></li>
-          <% end %>
-        </ol>
-        <div class="carousel-inner">
-          <% @rooms.each do |room| %>
-          <div class="carousel-item <%= room.id == 1 ? ' active' : '' %>">
-             <%= image_tag("landscapes/480/#{room.picture}", :class =>"d-block w-100", :height => '480', :style => 'width:100%', :alt => "Banner picture of #{room.name}") %>
-            <div class="carousel-caption d-none d-md-block">
-              <h5><%= room.name %></h5>
-              <p><%= truncate(room.avantgarde, :length => 76, :separator => ' ')%></p>
-            </div>
-          </div>
-          <% end %>
-        </div>
-        <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        </a>
-        <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        </a>
-      </div>
+      <!-- the picture allows much more options -->
+      <picture id="banner_picture" role="img" aria-label="banner picture">
+        <source media="(min-width:600px)" srcset="<%= asset_path('landscapes/480/conference_brown.jpg', type: :image) %>">
+        <%= image_tag('landscapes/480/conference_brown.jpg', :size => '1920x480', :alt => "Banner picture of our premium conference room") %>
+      </picture>
     </header>
     <nav class="crumbs" aria-label="navigation menu">
       <ul aria-label="navigation options">

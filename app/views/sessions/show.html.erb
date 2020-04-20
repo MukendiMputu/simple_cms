@@ -1,6 +1,6 @@
 				<div id="user-info">
 			<div id="user-info-pane">
-				<img id="logged-avatar" width="200" class="img_widget" src="<%= @user.picture ? asset_path("#{@user.picture}", type: :image) : asset_path('avatar_default.png', type: :image) %>"/>
+				<%= @user.picture ? image_tag("#{@user.picture}", :class =>"img_widget", :alt => "avatar picture") : image_tag("100/avatar_default.png", :class =>"img_widget", :alt => "avatar default picture")%>
 				<br/>
 				<%= link_to("Edit profile", edit_user_path) %>
 			</div>

@@ -1,7 +1,5 @@
 class UsersController < ApplicationController
   
-  has_secure_password
-
   def signup
     # Just shows the signup form
   end
@@ -20,9 +18,9 @@ class UsersController < ApplicationController
   def signin
     # checks presence of email and password and..
     if params.key?(:user)
-      if @user = User.find_by_email(login_params)#
+      if @user = User.find_by_email(login_params)
         # verify password
-        if @user.authenticate
+        if @user.authenticate(params[:password])
           # ... redirect to show action
           redirect_to(user_path(@user.id))
         else
@@ -33,9 +31,10 @@ class UsersController < ApplicationController
         flash[:alert] = "Login failed."
         redirect_to(root_path)
       end 
+    else
+      flash[:alert] = "Please, fill in the fields properly."
+      redirect_to(root_path)
     end
-    flash[:alert] = "Please, fill in the fields properly."
-    redirect_to(root_path)
   end
   
     def show

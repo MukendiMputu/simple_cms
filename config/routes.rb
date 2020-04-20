@@ -1,17 +1,29 @@
 Rails.application.routes.draw do
   
+  get 'sessions/signin'
+  get 'sessions/show'
+  get 'sessions/edit'
+  get 'sessions/signout'
   root 'welcome#index'
   post 'welcome/search_booking'
 
-  resources :users, :only => [:show, :create] do # :except => [:index, :new]
+  resources :users, :only => [:show, :create, :edit] do # :except => [:index, :new]
     member do
-      get :signout
       get :delete
     end
 
     collection do
       get :signup
-      post :signin
+    end
+  end
+
+  resources :sessions, :only => [:show, :edit] do
+    member do
+      get :signout
+    end
+
+    collection do
+      get :signin
     end
   end
   
