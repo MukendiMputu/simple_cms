@@ -1,9 +1,4 @@
 Rails.application.routes.draw do
-  
-  get 'sessions/signin'
-  get 'sessions/show'
-  get 'sessions/edit'
-  get 'sessions/signout'
   root 'welcome#index'
   post 'welcome/search_booking'
 
