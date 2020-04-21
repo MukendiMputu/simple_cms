@@ -13,14 +13,14 @@ class LoginController < ApplicationController
         if found_user.authenticate(params[:password])
           session[:user_id] = found_user.id
           # ... redirect to show action
-          redirect_to(user_path(found_user.id))
+          redirect_to(login_path(found_user.id))
         else
           flash[:alert] = "Login failed: wrong email/password."
-          redirect_to(root_path)
+          redirect_back fallback_location: root_path
         end
       else
         flash[:alert] = "Login failed."
-        redirect_to(root_path)
+        redirect_back fallback_location: root_path
       end 
     else
       flash[:alert] = "Please, fill in the fields properly."
@@ -29,6 +29,8 @@ class LoginController < ApplicationController
   end
   
   def show
+    @user = User.find(params[:id])
+    
   end
 
   def delete

@@ -1,2 +1,48 @@
-<h1>Login#show</h1>
-<p>Find me in app/views/login/show.html.erb</p>
+		<div id="user-info">
+			<div id="user-info-pane">
+                <%= image_tag("640/avatar_default.png", :size => '200x200', :class =>"img_widget", :alt => "avatar default picture")%>
+                <br/>
+				<a href="#">Edit profile</a>
+			</div>
+			<div id="uf-ID" class=" float-left">
+				<h2><%= @user.first_name%> <%= @user.last_name %></h2>
+				<p><%= @user.email %></p>
+			</div>
+		</div><!-- end of user-info -->
+<div id="section">
+    <div id="booking_pane">
+        <div id="mp_tabs">
+            <ul class=" no-bullet">
+                <li id="overvTab"><a href="#reservations">Overview</a></li>
+                <li id="catTab"><a href="#">Invitation</a></li>
+                <li id="equipTab"><a href="#">Messages</a></li>
+                <li id="moreTab"><a href="#">More...</a></li>
+            </ul>
+        </div>
+        <div id="containers" >
+            <div id="overvPanel" class="showable">
+                <p><%= link_to("Add new booking", "#")%></p>
+                <% @user.bookings.each do |booking| %>
+                    <div class="card">
+                        <div class="room_thumbnail booking-thumbnail">
+                        <%= image_tag("480/#{booking.room.picture}", :class =>"img_widget", :alt => "avatar default picture")%>
+                        </div>
+                        <span><%= booking.room.number %></span>
+                    </div>
+                    <div class="ovPanelText booking-form">
+                        <h4><%= booking.agenda %></h4>
+                        <span>Date: <%= booking.date.to_formatted_s(:long_ordinal) %> </span><br/>
+                        <span>Time: <%= booking.start_time.to_formatted_s(:time) %> - <%= booking.end_time.to_formatted_s(:time) %> </span>
+                        <br/><br/><strong>Notes:</strong><br/>
+                        <% booking.notes.each do |note| %>
+                            <p class="note_bubble"><%= note.content %></p>
+                            <%= link_to("edit note", "#") %><br/>
+                        <% end %>
+                        <p style="color:#452113;"><%= link_to("Add note", '#', :class => 'add_note') %></p>
+                        <p class=" float-right"><%= link_to("edit booking", "#") %></p>
+                    </div>
+                <% end %>
+            </div>
+        </div>
+    </div>
+</div> <!-- end of section -->
