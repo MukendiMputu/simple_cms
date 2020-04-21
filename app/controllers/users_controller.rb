@@ -2,18 +2,21 @@ class UsersController < ApplicationController
    
   def new
     # Just shows the signup form
-    @user = User.new
   end
 
   def create
+    console
+    new_user = User.new(user_params)
     # creates and saves the user into the DB
-    if @user.save
-      @user.picture.attach(params[:picture])
-      flash[:notice] = "Account created successfully."
-      redirect_to(root_path)
+    if new_user.save?
+        redirect_to(login_index_path)
+    #   @user.picture.attach(params[:user][:picture])
+    #   flash[:notice] = "Account created successfully."
+    #   redirect_to(login_index_path)
     else
-      flash.now[:error] = "Registration failed"
-      render(:template => 'new')
+    #   flash.now[:error] = "Registration failed"
+    #   render('new')
+        redirect_to(new_user_path)
     end
     
   end
