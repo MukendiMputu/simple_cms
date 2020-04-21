@@ -1,33 +1,4 @@
-<!DOCTYPE html>
-
-<html lang="en">
-    <head>
-        <meta charset="utf-8"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <title>Conference Romm | Sign up </title>
-        <link rel="stylesheet" type="text/css" href="../styles/styles.css"/>
-        <link rel="stylesheet" media="screen and (max-width: 480px)" href="../styles/mobiles.css"/>
-    </head>
-
-    <body>
-        <!-- container -->
-        <div id="grid">
-            <div id="header">
-                <div id="h_navBar">
-                    <div id="logo" class=" float-left">
-                    <h1>Conference Room</h1>
-                    </div>
-                    <div id="h_side-nav">
-                        <ul id="side-nav">
-                            <li><%= link_to('Home', root_path) %></li>
-                            <li><%= link_to('Signin', signin_users_path) %></li>
-                        </ul>
-                    </div>
-                </div>
-            </div> <!-- end of header -->
-
-            <div id="banner"></div><!-- end of banner -->
-
+<% @page_title = 'Signup'%>
             <div id="section">
                 <div id="main_pane">
                 <div id="mp_titel" class="text-center"><h3>CREATE YOUR ACCOUNT</h3></div>
@@ -38,14 +9,8 @@
                         <%= label_tag(:picture, "Upload a profile picture: ") %>
                         <%= file_field_tag(:picture) %>
                     </div>
-                    <div id="succ_mod" class="invisible modal-succes">
-                        <p class="label_required success text-center">All good!</p>
-                    </div>
                     <div class="invisible modal-danger">
-                        <span class="label_required danger">The following errors(s) occured:</span>
-                        <ul class="error_list label_required danger">
-                            <li></li>
-                        </ul>
+                        <%= flash[:alert] %>
                     </div>
                     <div class="labeledInput">
                         <%= label_tag(:first_name, "First Name:") %><span class="label_required danger">&nbsp;*</span>
@@ -65,23 +30,20 @@
                     </div>
                     <div class="labeledInput">
                         <%= label_tag(:password, "Password:") %><span class="label_required danger">&nbsp;*</span>
-                        <%= text_field_tag(:password) %>
+                        <%= password_field_tag(:password) %>
                     </div>
                     <div class="labeledInput">
                         <%= label_tag(:confirm_pwd, "Confirm your password:") %><span class="label_required danger">&nbsp;*</span>
-                        <%= text_field_tag(:confirm_pwd) %>
+                        <%= password_field_tag(:confirm_pwd) %>
                     </div>
                     <span style="font-size: 8pt;color: #838383;">Field marked with <span class="label_required danger">&nbsp;*</span> are required</span>
                     <div class="text-center">
                         <br/>
                         <%= submit_tag('Sign up') %><hr />
-                        <p class="">or <%= link_to("Sign in", signin_users_path) %></p>
+                        <p class="">or <%= link_to("Sign in", login_index_path) %></p>
                     </div>
                     <br/>
                     <br/>
                 <% end %>
                 </div><!-- end of event pane -->
             </div> <!-- end of section -->
-        </div><!-- end of container -->
-    </body>
-</html>

@@ -1,8 +1,17 @@
 Rails.application.routes.draw do
   root 'welcome#index'
   post 'welcome/search_booking'
+  
+  resources :users, :only => [:new, :create, :edit, :destroy] do # :except => [:index, :new]
+    member do
+      get :delete
+    end
+    
+    collection do
+    end
+  end
 
-  resources :users, :only => [:create, :edit] do # :except => [:index, :new]
+  resources :login, :only => [:index, :create, :show, :delete] do
     member do
       get :delete
     end
@@ -10,7 +19,6 @@ Rails.application.routes.draw do
     collection do
     end
   end
-
   
   
   #get 'welcome/index' # match "welcome/index", :to => "welcome#index", :via => :get

@@ -18,14 +18,14 @@
           <div id="err_mod_main" class="invisible modal-danger">
             <span class="label_required invisible danger"><%= flash[:alert] %></span>
           </div>
-          <%= form_with(:model => @user, :url => signin_users_path, :method => 'post', :class => 'form-validate') do |form| %>
+          <%= form_with(:url => '/login', :method => 'post', :class => 'form-validate') do |form| %>
             <%= form.label(:email)%>
             <%= form.email_field(:email, placeholder: "e.g. name@address.com", :class => 'form-control')%>
             <%= form.label(:password)%>
             <%= form.password_field(:password, placeholder: "Enter your password", :class => 'form-control')%>
             <%= form.submit('Sign in', :class => 'btn-primary medium btn-submit') %>
             <span id="para_account" >
-              or <%= link_to("Sign up", signup_users_path, :class => 'btn-primary') %>
+              or <%= link_to("Sign up", new_user_path, :class => 'btn-primary') %>
             </span>
           <% end %>
         </div>
@@ -34,7 +34,7 @@
       <!-- the picture allows much more options -->
       <picture id="banner_picture" role="img" aria-label="banner picture">
         <source media="(min-width:600px)" srcset="<%= asset_path('landscapes/480/conference_brown.jpg', type: :image) %>">
-        <%= image_tag('landscapes/480/conference_brown.jpg', :size => '1920x480', :alt => "Banner picture of our premium conference room") %>
+        <%= image_tag('landscapes/480/conference_brown.jpg', :style => 'width:100%', :alt => "Banner picture of our premium conference room") %>
       </picture>
     </header>
     <nav class="crumbs" aria-label="navigation menu">

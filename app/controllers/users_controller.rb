@@ -1,45 +1,21 @@
 class UsersController < ApplicationController
    
+  def new
+    # Just shows the signup form
+  end
+
   def create
     # creates and saves the user into the DB
-    if @user.new(user_params)
+    @user.new(user_params)
+    if @user.save
       flash[:notice] = "Account created successfully."
-      redirect_to(signin_users_path)
+      redirect_to(login_index_path)
     else
       render(:template => 'signup')
     end
     
   end
 
-  def signin
-    # checks presence of email and password and..
-    if params.key?(:user)
-      if @user = User.find_by_email(login_params)
-        # verify password
-        if @user.authenticate(params[:password])
-          # ... redirect to show action
-          redirect_to(user_path(@user.id))
-        else
-          flash[:alert] = "Login failed."
-          redirect_to(root_path)
-        end
-      else
-        flash[:alert] = "Login failed."
-        redirect_to(root_path)
-      end 
-    else
-      flash[:alert] = "Please, fill in the fields properly."
-      redirect_to(root_path)
-    end
-  end
-  
-    def show
-      @user = User.find(1)
-      @user_bookings = @user.bookings
-    end
-
-  def signout
-  end
 
   def edit
     @user = User.find(params[:id])
@@ -59,7 +35,6 @@ class UsersController < ApplicationController
       flash[:notice] = "Account destroyed successfully."
   end 
 
-
   private 
 
     def user_params
@@ -67,13 +42,6 @@ class UsersController < ApplicationController
         :first_name, 
         :last_name, 
         :nickname, 
-        :email, 
-        :password
-      )
-    end
-
-    def login_params
-      params.require(:user).permit(
         :email, 
         :password
       )
