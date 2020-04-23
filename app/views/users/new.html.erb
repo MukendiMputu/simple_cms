@@ -3,11 +3,11 @@
     <div id="main_pane">
     <div id="mp_titel" class="text-center"><h3>CREATE YOUR ACCOUNT</h3></div>
     <div id="swiper" class="">
-            <%= flash[:notice] %>
+            <%= flash[:error] %>
         <%= form_with(:model => @user, :url => users_path, :method => 'post', :class => 'form-validate') do |f| %>
             <%= image_tag("100/avatar_default.png", :class =>"img_widget", :alt => "avatar default picture")%><br/>
             <%= label_tag(:picture, "Upload a profile picture: ") %><br/>
-            <%= f.file_field(:picture) %><br/>
+            <%= f.file_field(:picture) %><hr/>
             <%= label_tag(:first_name, "First Name:") %><span class="label_required danger">&nbsp;*</span>
             <%= f.text_field(:first_name) %><br/>
             <%= label_tag(:last_name, "Last Name:") %><span class="label_required danger">&nbsp;*</span>

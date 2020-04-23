@@ -14,13 +14,10 @@ class UsersController < ApplicationController
       @user.picture.attach(params[:user][:picture])
       redirect_to(login_index_path)
     else
-      #   render('new')
       @user.errors.full_messages.each do |msg|
-        puts "Create raised this: #{msg}"
-        flash.now[:error] = "Create raised this: #{msg}"
+        flash.now[:error] = "#{msg}"
       end
-      redirect_to(new_user_path)
-        
+      render('new')
     end
     
   end
@@ -37,7 +34,11 @@ class UsersController < ApplicationController
   end
 
   def delete
-    
+    # Synchronously destroy the avatar and actual resource files.
+    # user.avatar.purge
+
+    # Destroy the associated models and actual resource files async, via Active Job.
+    # user.avatar.purge_later
   end
 
   def destroy
@@ -56,4 +57,5 @@ class UsersController < ApplicationController
         :picture
       )
     end
+
 end

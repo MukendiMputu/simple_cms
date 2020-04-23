@@ -1,6 +1,10 @@
 		<div id="user-info">
 			<div id="user-info-pane">
-                <%= image_tag("640/avatar_default.png", :size => '200x200', :class =>"img_widget", :alt => "avatar default picture")%>
+                <% if @user.picture.attached? %>
+                    <%= image_tag(@user.picture, :size => '200x200', :class =>"img_widget", :alt => "avatar default picture")%>
+                <% else %>
+                    <%= image_tag("640/avatar_default.png", :size => '200x200', :class =>"img_widget", :alt => "avatar default picture")%>
+                <% end %>
                 <br/>
 				<a href="#">Edit profile</a>
 			</div>
