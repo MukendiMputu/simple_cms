@@ -33,5 +33,4 @@ class User < ApplicationRecord
                             :confirmation => true,
                             :on => :create
     
-    #validates :confirm_pwd,     :presence => true, :on => :create                             
 end

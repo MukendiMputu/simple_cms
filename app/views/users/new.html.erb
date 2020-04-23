@@ -3,11 +3,18 @@
     <div id="main_pane">
     <div id="mp_titel" class="text-center"><h3>CREATE YOUR ACCOUNT</h3></div>
     <div id="swiper" class="">
-            <%= flash[:error] %>
         <%= form_with(:model => @user, :url => users_path, :method => 'post', :class => 'form-validate') do |f| %>
             <%= image_tag("100/avatar_default.png", :class =>"img_widget", :alt => "avatar default picture")%><br/>
             <%= label_tag(:picture, "Upload a profile picture: ") %><br/>
             <%= f.file_field(:picture) %><hr/>
+                <% if f.object.errors.any? %>
+                    <ul>
+                    <% f.object.errors.full_messages.each do |message| %>
+                        <li><%= message %></li>
+                    <% end %>
+                    </ul>
+                <% end %>
+            <%= "Errors are:" + @errors.to_s %>
             <%= label_tag(:first_name, "First Name:") %><span class="label_required danger">&nbsp;*</span>
             <%= f.text_field(:first_name) %><br/>
             <%= label_tag(:last_name, "Last Name:") %><span class="label_required danger">&nbsp;*</span>
@@ -18,8 +25,8 @@
             <%= f.text_field(:email) %><br/>
             <%= label_tag(:password, "Password:") %><span class="label_required danger">&nbsp;*</span>
             <%= f.password_field(:password) %><br/>
-            <%= label_tag(:confirm_pwd, "Confirm your password:") %><span class="label_required danger">&nbsp;*</span>
-            <%= f.password_field(:confirm_pwd) %><br/>
+            <%= label_tag(:password_confirmation, "Confirm your password:") %><span class="label_required danger">&nbsp;*</span>
+            <%= f.password_field(:password_confirmation) %><br/>
             <span style="font-size: 8pt;color: #838383;">Field marked with <span class="label_required danger">&nbsp;*</span> are required</span>
             <br/>
             <%= f.submit('Sign up') %><br /><hr />

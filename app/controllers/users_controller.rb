@@ -6,20 +6,16 @@ class UsersController < ApplicationController
   end
 
   def create
-    console
     @user = User.new(user_params)
     # creates and saves the user into the DB
-    if @user.save!
+    if @user.valid?
+      @user.save
       flash[:notice] = "Account created successfully."
       @user.picture.attach(params[:user][:picture])
       redirect_to(login_index_path)
     else
-      @user.errors.full_messages.each do |msg|
-        flash.now[:error] = "#{msg}"
-      end
       render('new')
     end
-    
   end
 
 
@@ -53,8 +49,9 @@ class UsersController < ApplicationController
         :last_name, 
         :nickname, 
         :email, 
+        :picture,
         :password,
-        :picture
+        :password_confirmation # respect rails naming convention!!
       )
     end
 
