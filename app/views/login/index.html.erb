@@ -9,18 +9,21 @@
         <% end %>
         <div id="login" class="">
             <%= form_with(:url => '/login', :method => 'post', :class => 'form-validate') do |form| %>
-                <div class="labeledInput">
-                    <%= form.label(:email, :class => 'form-label')%>
-                    <%= form.email_field(:email, placeholder: "e.g. name@address.com", :class => 'form-input')%>
-                </div>
-                <div  class="labeledInput">
-                    <%= form.label(:password, :class => 'form-label')%>
-                    <%= form.password_field(:password, placeholder: "Enter your password", :class => 'form-input')%>
-                </div><br>
-                <div class="text-center">
-                  <%= form.submit('Sign in', :class => 'btn-primary medium btn-submit') %><hr>
-                  <p class="">or <%= link_to("create a new account", new_user_path) %></p>
-                </div>
+            <table summary="login form">
+              <tr>
+                <td><%= form.label(:email, :class => 'form-label')%></td>
+                <td><%= form.email_field(:email, placeholder: "e.g. name@address.com", :class => 'form-input')%></td>
+              </tr>
+              <tr>      
+                <td><%= form.label(:password, :class => 'form-label')%></td>
+                <td><%= form.password_field(:password, placeholder: "Enter your password", :class => 'form-input')%></td>
+              </tr>
+              <tr>
+                <td><%= form.submit('Sign in', :class => 'btn-primary medium btn-submit') %></td>
+              </tr>
+            </table>     
+            <hr>
+            <p class="">or <%= link_to("create a new account", new_user_path) %></p>
             <% end %>
         </div>
       </div><!-- end of event pane -->
