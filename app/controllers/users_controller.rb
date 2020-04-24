@@ -7,13 +7,15 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    # creates and saves the user into the DB
+    # instantiate and saves the user into the DB
     if @user.save
       flash[:notice] = "Account created successfully."
       @user.picture.attach(params[:user][:picture])
       redirect_to(login_index_path)
     else
-      render('new')
+      logger.error(@user.errors.full_messages)
+      flash.now[:error] = "Something went wrong!"
+      render(:template => '/users/new')
     end
   end
 

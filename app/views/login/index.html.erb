@@ -1,10 +1,11 @@
+<% @page_title = 'Signin'%>
 <div id="section">
   <div id="main_pane">
     <div id="mp_titel" class="text-center"><h3>LOGIN</h3></div>
       <div class="panes">
-        <% if !flash[:notice].blank? %>
-        <div class = "notice">
-          <%= flash[:notice] %>
+        <% if !flash[:error].blank? %>
+        <div class = "error">
+          <%= flash[:error] %>
         </div>
         <% end %>
         <div id="login" class="">
@@ -22,9 +23,9 @@
                 <td><%= form.submit('Sign in', :class => 'btn-primary medium btn-submit') %></td>
               </tr>
             </table>     
+            <% end %>
             <hr>
             <p class="">or <%= link_to("create a new account", new_user_path) %></p>
-            <% end %>
         </div>
       </div><!-- end of event pane -->
   </div> <!-- end of main pane -->

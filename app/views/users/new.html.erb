@@ -2,15 +2,20 @@
 <div id="section">
     <div id="main_pane">
         <h3>CREATE YOUR ACCOUNT</h3>
-        <%= form_with(:model => @user, :class => 'form-validate', :aria => {:label => 'signup form'}) do |f| %>
+        <% if !flash[:error].blank? %>
+        <div class = "error">
+          <%= flash[:error] %>
+        </div>
+        <% end %>
+        <%= form_for(@user, :class => 'form-validate', :aria => {:label => 'signup form'}) do |f| %>
         <%= image_tag("100/avatar_default.png", :class =>"img_widget", :alt => "avatar default picture")%><br/>
         <%= f.label(:picture, "Choose a picture: ") %>
         <%= f.file_field(:picture, accept: 'image/png,image/gif,image/jpeg' ,:aria => {:label => 'picture upload'}) %><hr/>
-        <%  error_messages_for(f.object) %>
         <table summary="registration form">
             <tr>
                 <td><%= f.label(:first_name, "First Name:") %></td>
                 <td><%= f.text_field(:first_name) %></td>
+                <td rowspan="7"><%= error_messages_for(@user) %></td>
             </tr>
             <tr>
                 <td><%= f.label(:last_name, "Last Name:") %></td>

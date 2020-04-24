@@ -6,7 +6,7 @@ class LoginController < ApplicationController
 
   def create
     # checks presence of email and password and..
-    if params.key?(:email) && params.key?(:password)
+    if !(params[:email].blank? && params[:password].blank?)
       found_user = User.find_by_email(params[:email])
       if found_user
         # verify password
@@ -15,16 +15,16 @@ class LoginController < ApplicationController
           # ... redirect to show action
           redirect_to(login_path(found_user.id))
         else
-          flash[:alert] = "Login failed: wrong email/password."
+          flash[:error] = "Wrong email/password combination"
           redirect_back fallback_location: root_path
         end
       else
-        flash[:alert] = "Login failed."
+        flash[:error] = "Wrong email/password combination"
         redirect_back fallback_location: root_path
       end 
     else
-      flash[:alert] = "Please, fill in the fields properly."
-      redirect_to(root_path)
+      flash[:error] = "Please, fill in the fields properly"
+      redirect_back fallback_location: root_path
     end
   end
   
