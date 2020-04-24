@@ -6,30 +6,70 @@
         <%= form_with(:model => @user, :url => users_path, :method => 'post', :class => 'form-validate') do |f| %>
             <%= image_tag("100/avatar_default.png", :class =>"img_widget", :alt => "avatar default picture")%><br/>
             <%= label_tag(:picture, "Upload a profile picture: ") %><br/>
-            <%= f.file_field(:picture) %><hr/>
-                <% if f.object.errors.any? %>
-                    <ul>
-                    <% f.object.errors.full_messages.each do |message| %>
-                        <li><%= message %></li>
-                    <% end %>
-                    </ul>
-                <% end %>
-            <%= "Errors are:" + @errors.to_s %>
-            <%= label_tag(:first_name, "First Name:") %><span class="label_required danger">&nbsp;*</span>
-            <%= f.text_field(:first_name) %><br/>
-            <%= label_tag(:last_name, "Last Name:") %><span class="label_required danger">&nbsp;*</span>
-            <%= f.text_field(:last_name) %><br/>
-            <%= label_tag(:nickname, "Nickname:") %><span class="label_required danger">&nbsp;*</span>
-            <%= f.text_field(:nickname) %><br/>
-            <%= label_tag(:email, "Email Address:") %><span class="label_required danger">&nbsp;*</span>
-            <%= f.text_field(:email) %><br/>
-            <%= label_tag(:password, "Password:") %><span class="label_required danger">&nbsp;*</span>
-            <%= f.password_field(:password) %><br/>
-            <%= label_tag(:password_confirmation, "Confirm your password:") %><span class="label_required danger">&nbsp;*</span>
-            <%= f.password_field(:password_confirmation) %><br/>
-            <span style="font-size: 8pt;color: #838383;">Field marked with <span class="label_required danger">&nbsp;*</span> are required</span>
-            <br/>
-            <%= f.submit('Sign up') %><br /><hr />
+            <%= f.file_field(:picture, :tabindex => '0', :autofocus => true, :onfocus => "this.style.backgroundColor='DCDCDC;'") %><hr/>
+            <%  error_messages_for(f.object) %>
+        <table border="0" summary="registration form">
+            <tr>
+                <td>
+                    <%= label_tag(:first_name, "First Name:") %><span class="label_required danger">&nbsp;*</span>
+                </td>
+                <td>
+                    <%= f.text_field(:first_name) %><br/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <%= label_tag(:last_name, "Last Name:") %><span class="label_required danger">&nbsp;*</span>
+                </td>
+                <td>
+                    <%= f.text_field(:last_name) %><br/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+
+                    <%= label_tag(:nickname, "Nickname:") %><span class="label_required danger">&nbsp;*</span>
+                </td>
+                <td>
+                    <%= f.text_field(:nickname) %><br/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+
+                    <%= label_tag(:email, "Email Address:") %><span class="label_required danger">&nbsp;*</span>
+                </td>
+                <td>
+                    <%= f.text_field(:email) %><br/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+
+                    <%= label_tag(:password, "Password:") %><span class="label_required danger">&nbsp;*</span>
+                </td>
+                <td>
+                    <%= f.password_field(:password) %><br/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+
+                    <%= label_tag(:password_confirmation, "Confirm your password:") %><span class="label_required danger">&nbsp;*</span>
+                </td>
+                <td>
+                    <%= f.password_field(:password_confirmation, :aria => { :label => 'password confirmation' }) %><br/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                <span style="font-size: 8pt;color: #838383;">Field marked with <span class="label_required danger">&nbsp;*</span> are required</span>
+                <br/>
+                <%= f.submit('Sign up') %>
+                </td>
+            </tr>
+        </table>
+            <hr />
         <% end %>
             <p class="">or <%= link_to("Sign in", login_index_path) %></p>
         </div>

@@ -1,0 +1,12 @@
+<% if object && object.errors.size > 0 %>
+    <div class="invisible modal-danger">
+        <span class="label_required danger">
+            The following <%= pluralize(object.errors.size, "error") %> occured:
+        </span>
+        <ul class="error_list label_required danger">
+            <% object.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+            <% end %>
+        </ul>
+    </div>
+<% end %>

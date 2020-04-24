@@ -1,4 +1,9 @@
-		<div id="user-info">
+<% if !flash[:notice].blank? %>
+    <div class = "notice">
+        <%= flash[:notice] %>
+    </div>
+<% end %>
+        <div id="user-info">
 			<div id="user-info-pane">
                 <% if @user.picture.attached? %>
                     <%= image_tag(@user.picture, :size => '200x200', :class =>"img_widget", :alt => "avatar default picture")%>

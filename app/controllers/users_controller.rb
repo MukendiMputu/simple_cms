@@ -8,8 +8,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     # creates and saves the user into the DB
-    if @user.valid?
-      @user.save
+    if @user.save
       flash[:notice] = "Account created successfully."
       @user.picture.attach(params[:user][:picture])
       redirect_to(login_index_path)
