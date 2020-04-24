@@ -15,7 +15,7 @@ class UsersController < ApplicationController
     else
       logger.error(@user.errors.full_messages)
       flash.now[:error] = "Something went wrong!"
-      render(:template => '/users/new')
+      render('new')
     end
   end
 

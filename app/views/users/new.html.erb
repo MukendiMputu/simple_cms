@@ -7,7 +7,7 @@
           <%= flash[:error] %>
         </div>
         <% end %>
-        <%= form_for(@user, :class => 'form-validate', :aria => {:label => 'signup form'}) do |f| %>
+        <%= form_with(model: @user, :class => 'form-validate', :aria => {:label => 'signup form'}, :local => true) do |f| %>
         <%= image_tag("100/avatar_default.png", :class =>"img_widget", :alt => "avatar default picture")%><br/>
         <%= f.label(:picture, "Choose a picture: ") %>
         <%= f.file_field(:picture, accept: 'image/png,image/gif,image/jpeg' ,:aria => {:label => 'picture upload'}) %><hr/>
