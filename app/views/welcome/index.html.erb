@@ -1,14 +1,14 @@
    <% @page_title = 'Home'%> 
     <!-- [ HEADER ] -->
     <header id="header" aria-label="page banner">
-      <div id="page_heading" class="float-left" aria-label="page heading">
+      <div id="page_heading" class="" aria-label="page heading">
         <h1><%= link_to("Conference Room", root_path, :role => 'link') %></h1>
       </div>
       <!--[ LOGIN ]-->
       <div id="login_main" aria-label="login pane">
         <div id="login" >
-          <div id="err_mod_main" class="invisible modal-danger">
-            <span class="label_required invisible danger">
+          <div id="err_mod_main" class="" >
+            <span class="" >
               <%= flash[:alert] if !flash[:alert].blank? %>
               <%= flash[:notice] if !flash[:notice].blank?  %>
               <%= flash[:error] if !flash[:error].blank?  %>
@@ -33,7 +33,7 @@
         <%= image_tag('landscapes/480/conference_brown.jpg', :style => 'width:100%', :alt => "Banner picture of our premium conference room") %>
       </picture>
     </header>
-    <nav class="crumbs" aria-label="navigation menu">
+    <nav class="" aria-label="navigation menu">
       <ul aria-label="navigation options">
         <li><%= link_to("Home", "#") %></li>
         <li><%= link_to("Services", "#") %></li>
@@ -48,20 +48,20 @@
       <!--[ MAIN CONTENT ]-->
       <article id="section" aria-label="main content">
         <section id="main_pane">
-          <div id="mp_titel" class="text-center">
+          <div id="mp_titel" class="" >
             <h1>Our Rooms</h1>
           </div>
 
           <div id="swiper">
-	          <div id="room_panorama" class="search">
+	          <div id="room_panorama" class="" >
               <% @rooms.each do |room| %>
-              <div class="card room">
+              <div class="" >
                 <picture id="room_thumbnail" role="img" aria-label="room thumbnail">
                   <source media="(min-width:600px)" srcset="<%= asset_path("480/#{room.picture}", type: :image) %>">
-                          <img alt="conference room number <%= room.number %>" class="img-small" src="<%= asset_path("480/#{room.picture}", type: :image) %>"/>
+                          <img alt="conference room number <%= room.number %>" class="" src="<%= asset_path("480/#{room.picture}", type: :image) %>"/>
                 </picture>
-                <p class="room_description"> <%= truncate(room.avantgarde, :length => 150, :separator => ' ') %></p>
-                <p class="room_details">
+                <p class="" > <%= truncate(room.avantgarde, :length => 150, :separator => ' ') %></p>
+                <p class="" >
                   <h4><%= room.building %></h4>
                   <span>Configuration:  <%= room.configuration %></span><br/>
                   <span>Capacity:  <%= room.capacity %></span>
@@ -72,25 +72,25 @@
             </div>
           </div>
         </section>
-        <section class="search">
+        <section class="" >
           <h1>Availabilities</h1>
-          <div id="date_picker" class="text-center">
+          <div id="date_picker" class="" >
             <%= time_tag(Date.today, :id => 'dp_date') %>
           </div>
           <%= form_with(:url => {:action => :search_booking}, :method => "post") do %>
-          <div class="search_flex">
+          <div class="" >
             <%= label_tag(:number, 'Room:', :class => 'search_label') %>
             <%= select_tag(:number, options_for_select(@rooms.map{|r| [r.number, r.id]}), {:include_blank => true}) %>
           </div>
-          <div class="search_flex">
+          <div class="" >
             <%= label_tag(:date, 'Date:', :class => 'search_label') %>
             <%= date_field_tag(:date, Date.today, :min => Time.now.year-1, :max => Time.now.year+5, :class => "form-date")%>
           </div>
-          <div class="search_flex">
+          <div class="" >
             <%= label_tag(:start_time, 'from ', :class => 'search_label') %>
             <%= time_field_tag(:start_time, Time.now.strftime("%H:%M"), :step => 1800, :min => "06:00", :max => "22:00", :class => "form-date") %>
           </div>
-          <div class="search_flex">
+          <div class="" >
             <%= label_tag(:end_time, 'to ', :class => 'search_label') %>
             <%= time_field_tag(:end_time, (Time.now.advance(hours: 6)).strftime("%H:%M"), :step => 1800, :min => "06:00", :max => "22:00", :class => "form-date") %>
           </div>
@@ -101,18 +101,18 @@
           <br />
           <div>
 	          <div id="room_panorama" class="">
-              <% @bookings.each do |booking| %>
-              <div class="card room">
+            <% @bookings.each do |booking| %>
+              <div class="" >
                 <picture id="" role="img" aria-label="room thumbnail">
                   <source media="(min-width:600px)" srcset="<%= asset_path("480/#{booking.room.picture}", type: :image) %>">
-                          <img alt="conference room number <%= booking.room.number %>" class="img-small" src="<%= asset_path("480/#{booking.room.picture}", type: :image) %>"/>
+                          <img alt="conference room number <%= booking.room.number %>" class="" src="<%= asset_path("480/#{booking.room.picture}", type: :image) %>"/>
                 </picture>
-                <p class="room_details">
+                <p class="" >
                   <h4><%= booking.agenda %></h4>
                   <span>Date:  <%= booking.date.to_formatted_s(:long_ordinal) %></span><br/>
                   <span>Time:  <%= booking.start_time.to_formatted_s(:time) %> - <%= booking.end_time.to_formatted_s(:time)%></span>
                 </p>
-                <p><span  class=""><%= link_to('View more', '#') %></span><br /></p>
+                <p><span  class=" link_to('View more', '#') %></span><br /></p>
               </div>
               <% end %>
             </div>
@@ -129,17 +129,17 @@
     <!--[ FOOTER ]-->
     <footer id="footer" aria-label="page footer">
       <div id="f_wrapper" >
-        <div id="f_map" class="f_box" aria-label="company location">
+        <div id="f_map" class="" aria-label="company location">
           <h2>Location</h2><br/>
           <div id="googleMap"></div>
         </div>
-        <div id="f_cont" class="f_box" aria-label="company conta">
+        <div id="f_cont" class="" aria-label="company conta">
           <h2>Contact</h2>
           <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
             sed diam nonumy eirmod tempor invidunt ut labore et dolore
             magna aliquyam erat, sed diam voluptua.</p>
         </div>
-        <div id="f_impr" class="f_box" aria-label="company location">
+        <div id="f_impr" class="" aria-label="company location">
           <h2>Impresum</h2>
           <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
             sed diam nonumy eirmod tempor invidunt ut labore et dolore

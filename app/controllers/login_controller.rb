@@ -12,6 +12,7 @@ class LoginController < ApplicationController
         # verify password
         if found_user.authenticate(params[:password])
           session[:user_id] = found_user.id
+          flash[:notice] = "Welcome, #{found_user.nickname}!"
           # ... redirect to show action
           redirect_to(login_path(found_user.id))
         else
@@ -35,6 +36,9 @@ class LoginController < ApplicationController
   end
 
   def delete
+    session[:user_id] = nil
+    flash[:notice] = "You've been logged out successfully!"
+    redirect_to(login_index_path)
   end
 
   private

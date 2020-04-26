@@ -5,9 +5,9 @@
         </div>
         <div id="h_side-nav">
             <ul id="side-nav">
-                <li><a href="index.php">Home</a></li>
-                <li><a href="welcome.php?id= <?php echo isset($_SESSION['user_id']) ? $_SESSION['user_id'] : ''; ?>" class="active">Dashboard</a></li>
-                <li><a href="signout.php">Sign out</a></li>
+                <li><%= link_to("Home", root_path)%></li>
+                <li><%= link_to("Dashboard", root_path)%></li>
+                <li><%= link_to("Signout", root_path)%></li>
             </ul>
         </div>
     </div>

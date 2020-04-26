@@ -1,4 +1,7 @@
+<% if session[:user_id].present? %>
 <% @page_title = @user.nickname %>
+<%= show_logged_header(@user)%>
+<% end %>
 <% if !flash[:notice].blank? %>
     <div class = "notice" role="alert" aria-label="application notification message">
         <%= flash[:notice] %>
