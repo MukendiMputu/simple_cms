@@ -4,7 +4,6 @@ class CreateNotes < ActiveRecord::Migration[6.0]
       t.integer "booking_id"
       t.text "content"
       t.integer "prev_note"
-      t.integer "next_note"
 
       t.timestamps
     end

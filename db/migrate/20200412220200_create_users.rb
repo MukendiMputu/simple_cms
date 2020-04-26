@@ -6,6 +6,7 @@ class CreateUsers < ActiveRecord::Migration[6.0]
       t.string "nickname", :limit => 25, :unique => true
       t.string "email", :default => '', :null => false
       t.string "password_digest"
+      t.string "picture"
 
       t.timestamps
     end
