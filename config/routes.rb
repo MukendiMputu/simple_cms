@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'rooms/index'
   root 'welcome#index'
   post 'welcome/search_booking'
   
