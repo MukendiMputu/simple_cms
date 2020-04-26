@@ -7,4 +7,11 @@ module ApplicationHelper
             :locals => { :object => object }
         )
     end
+
+    def show_logged_header(object)
+        render(
+            :partial => 'application/logged_header',
+            :locals => {:object => object}
+        )
+    end
 end

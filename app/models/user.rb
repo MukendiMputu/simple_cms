@@ -1,12 +1,12 @@
 class User < ApplicationRecord
     has_many :bookings
     has_many :invitations, :through => :bookings
-    has_many :guests, :through => :invitations
     
     has_secure_password
     has_one_attached :picture
     
     EMAIL_REGEX = /\A[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}\Z/i
+    EMAIL_REGEX2 = /\A([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)\Z/i
 
     validates :first_name,  :presence => true,
                             :length => {:maximum => 25},

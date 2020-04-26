@@ -1,58 +1,106 @@
 <% @page_title = @user.nickname %>
 <% if !flash[:notice].blank? %>
-    <div class = "notice">
+    <div class = "notice" role="alert" aria-label="application notification message">
         <%= flash[:notice] %>
     </div>
 <% end %>
-        <div id="user-info">
-			<div id="user-info-pane">
-                <% if @user.picture.attached? %>
-                    <%= image_tag(@user.picture, :size => '200x200', :class =>"img_widget", :alt => "avatar default picture")%>
-                <% else %>
-                    <%= image_tag("640/avatar_default.png", :size => '200x200', :class =>"img_widget", :alt => "avatar default picture")%>
-                <% end %>
-                <br/>
-				<a href="#">Edit profile</a>
-			</div>
-			<div id="uf-ID" class=" float-left">
-				<h2><%= @user.first_name%> <%= @user.last_name %></h2>
-				<p><%= @user.email %></p>
-			</div>
-		</div><!-- end of user-info -->
+<% if !flash[:error].blank? %>
+<div class = "error" role="alert" aria-label="application error message">
+    <%= flash[:error] %>
+</div>
+<% end %>
+<% if !flash[:alert].blank? %>
+<div class = "alert" role="alert" aria-label="application alert message">
+    <%= flash[:alert] %>
+</div>
+<% end %>
+<div id="user-info" aria-label="user info">
+    <div id="user-info-pane">
+        <% if @user.picture.attached? %>
+            <%= image_tag(@user.picture, :size => '200x200', :class =>"img_widget", :alt => "avatar default picture")%>
+        <% else %>
+            <%= image_tag("640/avatar_default.png", :size => '200x200', :class =>"img_widget", :alt => "avatar default picture")%>
+        <% end %>
+        <br/>
+        <a href="#">Edit profile</a>
+    </div>
+    <div id="uf-ID" class=" float-left">
+        <h1><%= @user.first_name%> <%= @user.last_name %><br/>
+            <%= @user.nickname %>
+        </h1>
+        <p><%= @user.email %></p>
+    </div>
+</div><!-- end of user-info -->
+<hr />
 <div id="section">
-    <div id="booking_pane">
-        <div id="mp_tabs">
+    <div id="main">
+        <div id="mp_tabs" role="menu">
             <ul class=" no-bullet">
-                <li id="overvTab"><a href="#reservations">Overview</a></li>
-                <li id="catTab"><a href="#">Invitation</a></li>
-                <li id="equipTab"><a href="#">Messages</a></li>
-                <li id="moreTab"><a href="#">More...</a></li>
+                <li id="overvTab"><%= link_to("Overview", "#my_bookings")%></li>
+                <li id="catTab"><%= link_to("Invitation", "#my_invitation")%></li>
+                <li id="equipTab"><%= link_to("Messages", "#my_msg")%></li>
             </ul>
         </div>
-        <div id="containers" >
+        <div id="my_bookings" aria-label="my bookings">
             <div id="overvPanel" class="showable">
+                <h2>My <%= pluralize( @user.bookings.size ,"Event") %></h2>
                 <p><%= link_to("Add new booking", "#")%></p>
                 <% @user.bookings.each do |booking| %>
-                    <div class="card">
-                        <div class="room_thumbnail booking-thumbnail">
-                        <%= image_tag("480/#{booking.room.picture}", :class =>"img_widget", :alt => "avatar default picture")%>
-                        </div>
-                        <span><%= booking.room.number %></span>
+                <div class="card" aria-label="room thumbnail">
+                    <div class="room_thumbnail booking-thumbnail">
+                    <%= image_tag("480/#{booking.room.picture}", :class =>"img_widget", :alt => "avatar default picture")%>
                     </div>
-                    <div class="ovPanelText booking-form">
-                        <h4><%= booking.agenda %></h4>
-                        <span>Date: <%= booking.date.to_formatted_s(:long_ordinal) %> </span><br/>
-                        <span>Time: <%= booking.start_time.to_formatted_s(:time) %> - <%= booking.end_time.to_formatted_s(:time) %> </span>
-                        <br/><br/><strong>Notes:</strong><br/>
-                        <% booking.notes.each do |note| %>
-                            <p class="note_bubble"><%= note.content %></p>
-                            <%= link_to("edit note", "#") %><br/>
-                        <% end %>
-                        <p style="color:#452113;"><%= link_to("Add note", '#', :class => 'add_note') %></p>
-                        <p class=" float-right"><%= link_to("edit booking", "#") %></p>
-                    </div>
+                    <span><%= booking.room.name %></span>
+                </div>
+                <p class=" float-right"><%= link_to("edit booking", "#") %></p>
+                <div class="ovPanelText booking-form" aria-label="booking details">
+                    <h4><%= booking.agenda %></h4>
+                    <span>Date: <%= booking.date.to_formatted_s(:long_ordinal) %> </span><br/>
+                    <span>Time: <%= booking.start_time.to_formatted_s(:time) %> - <%= booking.end_time.to_formatted_s(:time) %> </span>
+                    <br/><br/><strong>Notes:</strong><br/>
+                    <% booking.notes.each do |note| %>
+                        <p class="note_bubble"><%= note.content %></p>
+                        <%= link_to("edit note", "#") %><br/>
+                    <% end %>
+                    <p style="color:#452113;"><%= link_to("Add note", '#', :class => 'add_note') %></p>
+                </div>
+                <hr />
                 <% end %>
             </div>
         </div>
+        <div id="my_invitation", aria-label="my invitation">
+            <div id="overvPanel" class="showable">
+                <h2>Invitations</h2>
+                <div id="guest_list" aria-label="guest list">
+                    <ol>
+                        <% @user.bookings.each do |bkg| %>
+                            <li class="inv_evnt"><%= "#{bkg.agenda}" %>
+                                <ul>
+                                <% if bkg.invitations.size > 0 %>
+                                    <% bkg.invitations.each do |inv| %>
+                                        <li class="bkg_inv_guest">
+                                        <%= 
+                                            "#{inv.guest.first_name} #{inv.guest.last_name} (Status: #{inv.status})" 
+                                        %>
+                                        </li>
+                                    <% end %>
+                                <% else %>
+                                    <span>None</span>
+                                <% end %>
+                                </ul>
+                            </li>
+                        <% end %>
+                    <ol>
+                </div>
+            </div>
+        </div>
+        <div id="my_msg", aria-label="my messages">
+            <div id="overvPanel" class="showable">
+                <h2>Messages</h2>
+                <p><%= link_to("Write Message", "#")%></p>
+                <div id="msg_list" aria-label="all messages">
+                </div>
+            </div>
+        </div>
     </div>
-</div> <!-- end of section -->
+</div> 

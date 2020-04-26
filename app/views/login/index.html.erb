@@ -8,6 +8,16 @@
           <%= flash[:error] %>
         </div>
         <% end %>
+        <% if !flash[:notice].blank? %>
+        <div class = "notice">
+          <%= flash[:notice] %>
+        </div>
+        <% end %>
+        <% if !flash[:alert].blank? %>
+        <div class = "alert">
+          <%= flash[:alert] %>
+        </div>
+        <% end %>
         <div id="login" class="">
             <%= form_with(:url => '/login', :method => 'post', :class => 'form-validate') do |form| %>
             <table summary="login form">

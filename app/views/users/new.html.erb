@@ -7,6 +7,16 @@
           <%= flash[:error] %>
         </div>
         <% end %>
+        <% if !flash[:notice].blank? %>
+        <div class = "notice">
+          <%= flash[:notice] %>
+        </div>
+        <% end %>
+        <% if !flash[:alert].blank? %>
+        <div class = "alert">
+          <%= flash[:alert] %>
+        </div>
+        <% end %>
         <%= form_with(model: @user, :class => 'form-validate', :aria => {:label => 'signup form'}, :local => true) do |f| %>
         <%= image_tag("100/avatar_default.png", :class =>"img_widget", :alt => "avatar default picture")%><br/>
         <%= f.label(:picture, "Choose a picture: ") %>

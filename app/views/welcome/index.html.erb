@@ -9,9 +9,9 @@
         <div id="login" >
           <div id="err_mod_main" class="invisible modal-danger">
             <span class="label_required invisible danger">
-              <%= flash[:alert] %>
-              <%= flash[:notice] %>
-              <%= flash[:error] %>
+              <%= flash[:alert] if !flash[:alert].blank? %>
+              <%= flash[:notice] if !flash[:notice].blank?  %>
+              <%= flash[:error] if !flash[:error].blank?  %>
             </span>
           </div>
           <%= form_with(:url => '/login', :method => 'post', :class => 'form-validate') do |form| %>
