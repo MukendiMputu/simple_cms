@@ -1,100 +1,130 @@
    <% @page_title = 'Home'%> 
     <!-- [ HEADER ] -->
-    <header id="header" aria-label="page banner">
-      <div id="page_heading" class="" aria-label="page heading">
-        <h1><%= link_to("Conference Room", root_path, :role => 'link') %></h1>
-      </div>
-      <!--[ LOGIN ]-->
-      <div id="login_main" aria-label="login pane">
-        <div id="login" >
-          <div id="err_mod_main" class="" >
-            <span class="" >
-              <%= flash[:alert] if !flash[:alert].blank? %>
-              <%= flash[:notice] if !flash[:notice].blank?  %>
-              <%= flash[:error] if !flash[:error].blank?  %>
-            </span>
+    <header id="header" aria-label="page header">
+        <!--[ LOGIN ]-->
+      <div class=" navbar-light bg-light" >
+        <div id="page_heading" class="float-left ml-2" aria-label="page heading">
+            <%= link_to(root_path, :role => 'link', :class => 'navbar-brand') do %>
+              <%= image_tag('landscapes/480/conference_brown.jpg', :size => '50x50') %>
+              <h1 class="d-inline">Conference Room</h1>
+            <% end %>
+        </div>
+        <div id="login_main" class="d-none d-sm-block float-right mt-2" aria-label="login pane">
+          <div id="login" class=" mr-sm-2 " >
+            <% if !flash[:notice].blank? %>
+            <div class = "alert alert-info" role="alert" aria-label="application notification message">
+                <%= flash[:notice] %>
+            </div>
+            <% end %>
+            <% if !flash[:error].blank? %>
+            <div class = "alert alert-danger" role="alert" aria-label="application error message">
+                <%= flash[:error] %>
+            </div>
+            <% end %>
+            <% if !flash[:alert].blank? %>
+            <div class = "alert alert-warning" role="alert" aria-label="application alert message">
+                <%= flash[:alert] %>
+            </div>
+            <% end %>
+            <%= form_with(:url => '/login', :method => 'post', :class => 'form-inline') do |form| %>
+              <%= form.label(:email, :class => 'sr-only')%>
+              <div class="input-group mb-2 mr-sm-2">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">@</div>
+                </div>
+                <%= form.email_field(:email, placeholder: "e.g. name@address.com", :class => 'form-control')%>
+              </div>
+              <%= form.label(:password, :class => 'sr-only')%>
+              <%= form.password_field(:password, placeholder: "Enter your password", :class => 'form-control mb-2 mr-sm-2')%>
+              <div class="form-check mb-2 mr-sm-2">
+                <%= form.check_box(:ckeckBox, :class => 'form-check-input') %>
+                <%= form.label(:checkBox, 'Remember me', :class => 'form-check-label')%>
+              </div>
+              <%= form.submit('Sign in', :class => 'btn btn-light mb-2') %>
+              <span id="para_account" >
+                &nbsp;&nbsp; <%= link_to("Sign up", new_user_path, :class => 'btn btn-secondary mb-2') %>
+              </span>
+            <% end %>
           </div>
-          <%= form_with(:url => '/login', :method => 'post', :class => 'form-validate') do |form| %>
-            <%= form.label(:email)%>
-            <%= form.email_field(:email, placeholder: "e.g. name@address.com", :class => 'form-control')%>
-            <%= form.label(:password)%>
-            <%= form.password_field(:password, placeholder: "Enter your password", :class => 'form-control')%>
-            <%= form.submit('Sign in', :class => 'btn-primary medium btn-submit') %>
-            <span id="para_account" >
-              or <%= link_to("Sign up", new_user_path, :class => 'btn-primary') %>
-            </span>
-          <% end %>
         </div>
       </div>
       <!--[ BANNER ]-->
       <!-- the picture allows much more options -->
       <picture id="banner_picture" role="img" aria-label="banner picture">
         <source media="(min-width:600px)" srcset="<%= asset_path('landscapes/480/conference_brown.jpg', type: :image) %>">
-        <%= image_tag('landscapes/480/conference_brown.jpg', :style => 'width:100%', :alt => "Banner picture of our premium conference room") %>
+        <%= image_tag('landscapes/480/conference_brown.jpg', :class => ' w-100', :alt => "Banner picture of our premium conference room") %>
       </picture>
     </header>
     <nav class="" aria-label="navigation menu">
-      <ul aria-label="navigation options">
-        <li><%= link_to("Home", "#") %></li>
-        <li><%= link_to("Services", "#") %></li>
-        <li><%= link_to("About", "#") %></li>
-        <li><%= link_to("Contact", "#") %></li>
+      <ul class="list-inline" aria-label="navigation options">
+        <li class="list-inline-item"><%= link_to("Home", "#") %></li>
+        <li class="list-inline-item"><%= link_to("Services", "#") %></li>
+        <li class="list-inline-item"><%= link_to("About", "#") %></li>
+        <li class="list-inline-item"><%= link_to("Contact", "#") %></li>
       </ul>
     </nav>
     <hr />
     <!--[ PAGE CONTAINER ]-->
-    <main id="grid" aria-label="page container">
+    <main id="grid" class="container" aria-label="page container">
       <% @page_title = 'Home' %>
       <!--[ MAIN CONTENT ]-->
       <article id="section" aria-label="main content">
         <section id="main_pane">
           <div id="mp_titel" class="" >
-            <h1>Our Rooms</h1>
+            <h2>Our Rooms</h2>
           </div>
 
           <div id="swiper">
-	          <div id="room_panorama" class="" >
+	          <div id="room_panorama" class="card-deck">
               <% @rooms.each do |room| %>
-              <div class="" >
+              <div class="card " style="width: 18rem;">
                 <picture id="room_thumbnail" role="img" aria-label="room thumbnail">
                   <source media="(min-width:600px)" srcset="<%= asset_path("480/#{room.picture}", type: :image) %>">
-                          <img alt="conference room number <%= room.number %>" class="" src="<%= asset_path("480/#{room.picture}", type: :image) %>"/>
+                          <img alt="conference room number <%= room.number %>" class="card-img-top" src="<%= asset_path("480/#{room.picture}", type: :image) %>"/>
                 </picture>
-                <p class="" > <%= truncate(room.avantgarde, :length => 150, :separator => ' ') %></p>
-                <p class="" >
-                  <h4><%= room.building %></h4>
-                  <span>Configuration:  <%= room.configuration %></span><br/>
-                  <span>Capacity:  <%= room.capacity %></span>
-                </p>
-                <p><span  class=""><%= link_to('View more', '#') %></span><br /></p>
+                <dl class="card-body">
+                  <dt class="card-title"><%= room.name %></dt>
+                  <dd class="card-title"><%= truncate(room.avantgarde, :length => 150, :separator => ' ') %><dd>
+                  <dd>Configuration:  <%= room.configuration %></dd>
+                  <dd>Capacity:  <%= room.capacity %></dd>
+                  <dd><%= link_to('View more', '#', :class => 'btn btn-primary') %></dd>
+                </dl>
               </div>
               <% end %>
             </div>
+            <nav aria-label="Room navigation pages" class="mt-3">
+              <ul class="pagination pagination-sm justify-content-center">
+                <li class="page-item disabled">
+                  <span class="page-link">Previous</span>
+                </li>
+                <li class="page-item active" aria-current="page">
+                  <span class="page-link">
+                    1
+                    <span class="sr-only">(current)</span>
+                  </span>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                  <a class="page-link" href="#">Next</a>
+                </li>
+              </ul>
+            </nav>
           </div>
         </section>
         <section class="" >
-          <h1>Availabilities</h1>
-          <div id="date_picker" class="" >
+          <h2>Availabilities</h2>
             <%= time_tag(Date.today, :id => 'dp_date') %>
-          </div>
-          <%= form_with(:url => {:action => :search_booking}, :method => "post") do %>
-          <div class="" >
+          <div id="date_picker" class="" >
+            <%= form_with(:url => {:action => :search_booking}, :method => "post", :class => 'form-inline') do %>
             <%= label_tag(:number, 'Room:', :class => 'search_label') %>
             <%= select_tag(:number, options_for_select(@rooms.map{|r| [r.number, r.id]}), {:include_blank => true}) %>
-          </div>
-          <div class="" >
             <%= label_tag(:date, 'Date:', :class => 'search_label') %>
             <%= date_field_tag(:date, Date.today, :min => Time.now.year-1, :max => Time.now.year+5, :class => "form-date")%>
-          </div>
-          <div class="" >
             <%= label_tag(:start_time, 'from ', :class => 'search_label') %>
             <%= time_field_tag(:start_time, Time.now.strftime("%H:%M"), :step => 1800, :min => "06:00", :max => "22:00", :class => "form-date") %>
-          </div>
-          <div class="" >
             <%= label_tag(:end_time, 'to ', :class => 'search_label') %>
             <%= time_field_tag(:end_time, (Time.now.advance(hours: 6)).strftime("%H:%M"), :step => 1800, :min => "06:00", :max => "22:00", :class => "form-date") %>
-          </div>
-          <div>
             <%= submit_tag(raw("&#x1F50D;"), :class => 'circled-button') %>
           </div>
           <% end %>
@@ -102,17 +132,17 @@
           <div>
 	          <div id="room_panorama" class="">
             <% @bookings.each do |booking| %>
-              <div class="" >
+              <div class="card" style="width: 18rem;" >
                 <picture id="" role="img" aria-label="room thumbnail">
                   <source media="(min-width:600px)" srcset="<%= asset_path("480/#{booking.room.picture}", type: :image) %>">
-                          <img alt="conference room number <%= booking.room.number %>" class="" src="<%= asset_path("480/#{booking.room.picture}", type: :image) %>"/>
+                          <img alt="conference room number <%= booking.room.number %>" class="card-img-top" src="<%= asset_path("480/#{booking.room.picture}", type: :image) %>"/>
                 </picture>
-                <p class="" >
-                  <h4><%= booking.agenda %></h4>
-                  <span>Date:  <%= booking.date.to_formatted_s(:long_ordinal) %></span><br/>
-                  <span>Time:  <%= booking.start_time.to_formatted_s(:time) %> - <%= booking.end_time.to_formatted_s(:time)%></span>
-                </p>
-                <p><span  class=" link_to('View more', '#') %></span><br /></p>
+                <dl class="card-body" >
+                  <dt class="card-title"><%= booking.agenda %></dt>
+                  <dd>Date:  <%= booking.date.to_formatted_s(:long_ordinal) %></dd>
+                  <dd>Time:  <%= booking.start_time.to_formatted_s(:time) %> - <%= booking.end_time.to_formatted_s(:time)%></dd>
+                  <dd><%= link_to('View more', '#', :class => 'btn btn-primary') %></dd>
+                </dl>
               </div>
               <% end %>
             </div>
@@ -128,22 +158,27 @@
     <hr />
     <!--[ FOOTER ]-->
     <footer id="footer" aria-label="page footer">
-      <div id="f_wrapper" >
-        <div id="f_map" class="" aria-label="company location">
-          <h2>Location</h2><br/>
-          <div id="googleMap"></div>
-        </div>
-        <div id="f_cont" class="" aria-label="company conta">
-          <h2>Contact</h2>
-          <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
-            sed diam nonumy eirmod tempor invidunt ut labore et dolore
-            magna aliquyam erat, sed diam voluptua.</p>
-        </div>
-        <div id="f_impr" class="" aria-label="company location">
-          <h2>Impresum</h2>
-          <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
-            sed diam nonumy eirmod tempor invidunt ut labore et dolore
-            magna aliquyam erat, sed diam voluptua.</p>
+      <div id="f_wrapper" class="row">
+        <div class="col-sm">
+          <h1>Conference Room</h1>
+          <div class="row">
+            <div id="f_map" class="col-sm-4 px-lg-5" aria-label="company location">
+              <h2>Location</h2><br/>
+              <div id="googleMap"></div>
+            </div>
+            <div id="f_cont" class="col-sm-4 px-lg-5" aria-label="company conta">
+              <h2>Contact</h2>
+              <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
+                sed diam nonumy eirmod tempor invidunt ut labore et dolore
+                magna aliquyam erat, sed diam voluptua.</p>
+            </div>
+            <div id="f_impr" class="col-sm-4 px-lg-5" aria-label="company location">
+              <h2>Impresum</h2>
+              <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
+                sed diam nonumy eirmod tempor invidunt ut labore et dolore
+                magna aliquyam erat, sed diam voluptua.</p>
+            </div>
+          </div>
         </div>
       </div>
     </footer>

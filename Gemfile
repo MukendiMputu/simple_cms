@@ -22,6 +22,9 @@ gem 'jbuilder', '~> 2.7'
 # Use Active Model has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
+# Use pagination
+gem 'will_paginate', '~> 3.3.0'
+
 # User bootstrap
 gem 'bootstrap', '~> 4.4.1'
 gem 'jquery-rails'

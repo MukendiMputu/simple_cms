@@ -7,6 +7,8 @@ class WelcomeController < ApplicationController
 
   end
 
+  
+
   def search_booking
     
   end
