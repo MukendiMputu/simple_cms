@@ -22,6 +22,10 @@ gem 'jbuilder', '~> 2.7'
 # Use Active Model has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
+# User bootstrap
+gem 'bootstrap', '~> 4.4.1'
+gem 'jquery-rails'
+
 # Use irb as console
 gem 'irb', '~> 1.2.3'
 
