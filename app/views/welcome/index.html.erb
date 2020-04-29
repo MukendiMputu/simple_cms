@@ -116,17 +116,31 @@
         <section class="" >
           <h2>Availabilities</h2>
             <%= time_tag(Date.today, :id => 'dp_date') %>
-          <div id="date_picker" class="" >
-            <%= form_with(:url => {:action => :search_booking}, :method => "post", :class => 'form-inline') do %>
-            <%= label_tag(:number, 'Room:', :class => 'search_label') %>
-            <%= select_tag(:number, options_for_select(@rooms.map{|r| [r.number, r.id]}), {:include_blank => true}) %>
-            <%= label_tag(:date, 'Date:', :class => 'search_label') %>
-            <%= date_field_tag(:date, Date.today, :min => Time.now.year-1, :max => Time.now.year+5, :class => "form-date")%>
-            <%= label_tag(:start_time, 'from ', :class => 'search_label') %>
-            <%= time_field_tag(:start_time, Time.now.strftime("%H:%M"), :step => 1800, :min => "06:00", :max => "22:00", :class => "form-date") %>
-            <%= label_tag(:end_time, 'to ', :class => 'search_label') %>
-            <%= time_field_tag(:end_time, (Time.now.advance(hours: 6)).strftime("%H:%M"), :step => 1800, :min => "06:00", :max => "22:00", :class => "form-date") %>
-            <%= submit_tag(raw("&#x1F50D;"), :class => 'circled-button') %>
+          <div id="date_picker" class="search-bar mt-5 p-1 p-lg-1 pl-lg-4" >
+            <%= form_with(:url => {:action => :search_booking}, :method => "post", :class => '') do %>
+            <div class="row">
+              <div class="col-lg-3 align-items-center ">
+                <%= label_tag(:number, 'Room:', :class => 'sr-only') %>
+                <div class="dropdown bootstrap-select show">
+                <%= select_tag(:number, options_for_select(@rooms.map{|r| [r.number, r.id]}), {:include_blank => true, :class => 'custom-select border-0'} ) %>
+                </div>
+              </div>
+              <div class="col-lg-3 align-items-center">
+                <%= label_tag(:date, 'Date:', :class => 'sr-only') %>
+                <%= date_field_tag(:date, Date.today, :min => Time.now.year-1, :max => Time.now.year+5, :class => "form-control border-0 shadow-0")%>
+               </div>
+              <div class="col-lg-2 align-items-center"> 
+                <%= label_tag(:start_time, 'from ', :class => 'sr-only') %>
+                <%= time_field_tag(:start_time, Time.now.strftime("%H:%M"), :step => 1800, :min => "06:00", :max => "22:00", :class => "form-control border-0 shadow-0") %>
+               </div>
+              <div class="col-lg-2 align-items-center"> 
+                <%= label_tag(:end_time, 'to ', :class => 'sr-only') %>
+                <%= time_field_tag(:end_time, (Time.now.advance(hours: 6)).strftime("%H:%M"), :step => 1800, :min => "06:00", :max => "22:00", :class => "form-control border-0 shadow-0") %>
+              </div>
+              <div class="col-lg-2">  
+                <%= submit_tag("SEARCH", :class => 'btn btn-primary btn-block rounded-pill') %>
+              </div>
+            </div>
           </div>
           <% end %>
           <br />
@@ -154,14 +168,17 @@
                 <li class="page-item disabled">
                   <span class="page-link">Previous</span>
                 </li>
-                <li class="page-item active" aria-current="page">
+              <% pages = @bookings.size / 3 %>
+              <%  (1..pages).each do |n| %>
+                <!--<li class="page-item active" aria-current="page">
                   <span class="page-link">
                     1
                     <span class="sr-only">(current)</span>
                   </span>
                 </li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>-->
+                <li class="page-item"><a class="page-link" href="?page=<%= n %>"><%= n %></a></li>
+              <% end %>
                 <li class="page-item">
                   <a class="page-link" href="#">Next</a>
                 </li>
