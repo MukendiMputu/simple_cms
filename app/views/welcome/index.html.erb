@@ -1,16 +1,43 @@
    <% @page_title = 'Home'%> 
     <!-- [ HEADER ] -->
     <header id="header" aria-label="page header">
-        <!--[ LOGIN ]-->
-      <div class=" navbar-light bg-light" >
-        <div id="page_heading" class="float-left ml-2" aria-label="page heading">
+      <nav class="fixed-top navbar navbar-expand-lg navbar-dark bg-dark" aria-label="navigation menu">
+        <div id="page_heading" class="float-left col-lg-2" aria-label="page heading">
             <%= link_to(root_path, :role => 'link', :class => 'navbar-brand') do %>
               <%= image_tag('landscapes/480/conference_brown.jpg', :size => '50x50') %>
               <span class="d-inline">Conference Room</span>
             <% end %>
         </div>
-        <div id="login_main" class="d-none d-sm-block float-right mt-2" aria-label="login pane">
-          <div id="login" class=" mr-sm-2 " >
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="float-left col-lg-4">
+          <ul class="list-inline navbar-nav" aria-label="navigation options">
+            <li class="nav-item list-inline-item active">
+              <%= link_to("#", :class => 'nav-link') do %>
+              Home
+              <span class="sr-only">(current)</span>
+              <% end %>
+            </li>
+            <li class="nav-item list-inline-item dropdown">
+              <%= link_to("#", :class => 'nav-link dropdown-toggle', :id => "navbarDropdownMenuLink", :role => "button", :data => {toggle: "dropdown"}, :aria => {haspopup: "true", expanded: "false"}) do %>
+                Services
+              <% end %>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+            </li>
+            <li class="nav-item list-inline-item"><%= link_to("About", "#", :class => 'nav-link') %></li>
+            <li class="nav-item list-inline-item"><%= link_to("Contact", "#", :class => 'nav-link') %></li>
+          </ul>
+        </div>
+        
+        <!--[ LOGIN ]-->
+        <div id="login_main" class="d-none d-sm-block col-lg-6" aria-label="login pane">
+          <div id="login" class="" >
             <% if !flash[:notice].blank? %>
             <div class = "alert alert-info" role="alert" aria-label="application notification message">
                 <%= flash[:notice] %>
@@ -26,7 +53,7 @@
                 <%= flash[:alert] %>
             </div>
             <% end %>
-            <%= form_with(:url => '/login', :method => 'post', :class => 'form-inline') do |form| %>
+            <%= form_with(:url => '/login', :method => 'post', :class => 'form-inline justify-content-end') do |form| %>
               <%= form.label(:email, :class => 'sr-only')%>
               <div class="input-group mb-2 mr-sm-2">
                 <div class="input-group-prepend">
@@ -38,7 +65,7 @@
               <%= form.password_field(:password, placeholder: "Enter your password", :class => 'form-control mb-2 mr-sm-2')%>
               <div class="form-check mb-2 mr-sm-2">
                 <%= form.check_box(:ckeckBox, :class => 'form-check-input') %>
-                <%= form.label(:checkBox, 'Remember me', :class => 'form-check-label')%>
+                <%= form.label(:checkBox, 'Remember me', :class => 'form-check-label text-light')%>
               </div>
               <%= form.submit('Sign in', :class => 'btn btn-light mb-2') %>
               <span id="para_account" >
@@ -46,8 +73,9 @@
               </span>
             <% end %>
           </div>
+      </nav>
         </div>
-      </div>
+
       <!--[ BANNER ]-->
       <!-- the picture allows much more options -->
       <picture id="banner_picture" role="img" aria-label="banner picture">
@@ -55,30 +83,6 @@
         <%= image_tag('landscapes/480/conference_brown.jpg', :class => ' w-100', :alt => "Banner picture of our premium conference room") %>
       </picture>
     </header>
-    <nav class="sticky-top navbar navbar-expand-lg  navbar-dark bg-dark justify-content-center" aria-label="navigation menu">
-      <div class="container">
-      <ul class="list-inline navbar-nav" aria-label="navigation options">
-        <li class="nav-item list-inline-item active">
-          <%= link_to("#", :class => 'nav-link') do %>
-          Home
-          <span class="sr-only">(current)</span>
-          <% end %>
-        </li>
-        <li class="nav-item list-inline-item dropdown">
-          <%= link_to("#", :class => 'nav-link dropdown-toggle', :id => "navbarDropdownMenuLink", :role => "button", :data => {toggle: "dropdown"}, :aria => {haspopup: "true", expanded: "false"}) do %>
-            Services
-          <% end %>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-        </li>
-        <li class="nav-item list-inline-item"><%= link_to("About", "#", :class => 'nav-link') %></li>
-        <li class="nav-item list-inline-item"><%= link_to("Contact", "#", :class => 'nav-link') %></li>
-      </ul>
-      </div>
-    </nav>
     <hr class="sr-only" />
     <!--[ PAGE CONTAINER ]-->
     <main id="grid" class="container" aria-label="page container">
@@ -106,7 +110,7 @@
                   <br/><span>Configuration:  <%= room.configuration %></span>
                   <br/><span>Capacity:  <%= room.capacity %></span>
                   </p>
-                  <%= link_to('View more', '#', :class => 'btn btn-primary') %>
+                  <%= link_to('View more', '#', :class => 'btn btn-secondary') %>
                 </div>
               </div>
             </div>
@@ -122,7 +126,7 @@
               <div class="col-lg-3 align-items-center ">
                 <%= label_tag(:number, 'Room:', :class => 'sr-only') %>
                 <div class="dropdown bootstrap-select show">
-                <%= select_tag(:number, options_for_select(@rooms.map{|r| [r.number, r.id]}), {:include_blank => true, :class => 'custom-select border-0'} ) %>
+                <%= select_tag(:number, options_for_select(@rooms.map{|r| [r.number, r.id]}), {:include_blank => false, :class => 'custom-select border-0', :title => 'Rooms'} ) %>
                 </div>
               </div>
               <div class="col-lg-3 align-items-center">
@@ -157,7 +161,7 @@
                   <dt class="card-title"><%= booking.agenda %></dt>
                   <dd>Date:  <%= booking.date.to_formatted_s(:long_ordinal) %></dd>
                   <dd>Time:  <%= booking.start_time.to_formatted_s(:time) %> - <%= booking.end_time.to_formatted_s(:time)%></dd>
-                  <dd><%= link_to('View more', '#', :class => 'btn btn-primary') %></dd>
+                  <dd><%= link_to('View more', '#', :class => 'btn btn-secondary') %></dd>
                 </dl>
               </div>
             </div>

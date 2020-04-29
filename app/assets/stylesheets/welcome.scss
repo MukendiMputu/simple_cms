@@ -48,3 +48,49 @@ $gradient-radial: radial-gradient(#f0f7f4ff, #ef6461ff, #ffe74cff, #248232ff, #5
    background: #fff;
    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.15);
 }
+
+@media (max-width: 991.98px) {
+    .search-bar {
+        border-radius: 20px
+    }
+
+    .search-bar .form-group {
+        margin-bottom: 1rem
+    }
+
+    .search-bar .form-group::after {
+        display: block;
+        width: calc(100% - 4rem);
+        height: 1px;
+        content: '';
+        -webkit-transform: translateX(-50%);
+        transform: translateX(-50%);
+        background: #dee2e6;
+        position: absolute;
+        top: auto;
+        right: auto;
+        bottom: 0;
+        left: 50%
+    }
+
+    .search-bar .form-control {
+        height: calc(1.6em + .75rem + 2px);
+        padding: 10px 20px
+    }
+
+    .search-bar .input-label-absolute-right .label-absolute {
+        right: 1rem
+    }
+
+    .search-bar .bootstrap-select {
+        display: block !important;
+        width: 100% !important;
+        padding: 0
+    }
+
+    .search-bar .bootstrap-select button {
+        display: block;
+        width: 100% !important;
+        padding: 10px 20px
+    }
+}
