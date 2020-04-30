@@ -4,7 +4,7 @@
       <nav class="fixed-top navbar navbar-expand-lg navbar-dark bg-dark" aria-label="navigation menu">
         <div id="page_heading" class="float-left col-lg-2" aria-label="page heading">
             <%= link_to(root_path, :role => 'link', :class => 'navbar-brand') do %>
-              <%= image_tag('landscapes/480/conference_brown.jpg', :size => '50x50') %>
+              <%= image_tag('100/cr_logo_black.png', :size => '85x65', :class => 'border-1') %>
               <span class="d-inline">Conference Room</span>
             <% end %>
         </div>
@@ -74,7 +74,6 @@
             <% end %>
           </div>
       </nav>
-        </div>
 
       <!--[ BANNER ]-->
       <!-- the picture allows much more options -->
@@ -89,12 +88,13 @@
       <% @page_title = 'Home' %>
       <!--[ MAIN CONTENT ]-->
       <article id="section" aria-label="main content">
-        <section id="main_pane">
-          <div id="mp_titel" class="" >
+        <section id="main_pane" class="">
+          <div id="mp_titel" class="mt-5 mb-5" >
+            <p class="mb-0 text-uppercase text-monospace font-weight-bold text-primary">Stay and eat like a local</p>
             <h2>Our Rooms</h2>
           </div>
 
-          <div id="swiper" class="row flex-md-nowrap overflow-auto">
+          <div id="swiper" class="row flex-md-nowrap">
               <% @rooms.each do |room| %>
 	          <div id="room_panorama" class="col-sm-4">
               <div class="card mb-md-2">
@@ -117,9 +117,11 @@
               <% end %>
           </div>
         </section>
-        <section class="" >
-          <h2>Availabilities</h2>
-            <%= time_tag(Date.today, :id => 'dp_date') %>
+        <section class="my-6" >
+          <div id="avaible" class="mt-5 mb-5" >
+            <p class="mb-0 text-uppercase text-monospace font-weight-bold text-primary"><%= time_tag(Date.today, :id => 'dp_date') %></p>
+            <h2>Availabilities</h2>
+          </div>
           <div id="date_picker" class="search-bar mt-5 p-1 p-lg-1 pl-lg-4" >
             <%= form_with(:url => {:action => :search_booking}, :method => "post", :class => '') do %>
             <div class="row">
@@ -149,7 +151,7 @@
           <% end %>
           <br />
           <div>
-	          <div id="room_panorama" class="row flex-md-nowrap overflow-auto">
+	          <div id="room_panorama" class="row flex-md-nowrap">
               <% @bookings.each do |booking| %>
 	          <div id="room_panorama" class="col-sm-4">
               <div class="card" >
