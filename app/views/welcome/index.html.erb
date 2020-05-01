@@ -94,7 +94,7 @@
             <h2>Our Rooms</h2>
           </div>
 
-          <div id="swiper" class="row flex-md-nowrap">
+          <div id="swiper" class="row flex-md-nowrap overflow-hidden">
               <% @rooms.each do |room| %>
 	          <div id="room_panorama" class="col-sm-4">
               <div class="card mb-md-2">
@@ -151,7 +151,7 @@
           <% end %>
           <br />
           <div>
-	          <div id="room_panorama" class="row flex-md-nowrap">
+	          <div id="room_panorama" class="row flex-md-nowrap overflow-hidden">
               <% @bookings.each do |booking| %>
 	          <div id="room_panorama" class="col-sm-4">
               <div class="card" >
@@ -199,13 +199,13 @@
 
       </aside>
     </main>
-    <hr />
+    <hr class="sr-only"/>
     <!--[ FOOTER ]-->
-    <footer id="footer" aria-label="page footer">
-      <div id="f_wrapper" class="row">
+    <footer id="footer" aria-label="page footer" class="mt-5 p-3 bg-dark text-light">
+      <div id="f_wrapper" class="container">
         <div class="col-sm">
-          <h1>Conference Room</h1>
-          <div class="row">
+          <h1 class="font-weight-bold">Conference Room</h1>
+          <div class="row mt-3">
             <div id="f_map" class="col-sm-4 px-lg-5" aria-label="company location">
               <h2>Location</h2><br/>
               <div id="googleMap"></div>
@@ -226,4 +226,4 @@
         </div>
       </div>
     </footer>
-    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD2oNtRhnfGNgG_yQUNmBNa1kXJnNkzzp4&callback=myMap"></script> -->
+    <!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD2oNtRhnfGNgG_yQUNmBNa1kXJnNkzzp4&callback=myMap"></script>-->

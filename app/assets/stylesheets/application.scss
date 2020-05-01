@@ -13,6 +13,14 @@
  *= require welcome
 */
 $enable-responsive-font-sizes: true;
+/* RGB */
+$cultured: rgba(240, 247, 244, 1);
+$fire_opal: rgba(239, 100, 97, 1);
+$minion_yellow: rgba(255, 231, 76, 1);
+$forest_green: rgba(36, 130, 50, 1);
+$amazon: rgba(85, 133, 100, 1);
+$dark_liver: rgba(86, 73, 70, 1);
+$jet: rgba(49, 47, 47, 1);
 
 // Custom bootstrap variables must be set or imported *before* bootstrap.
 @import "bootstrap";
