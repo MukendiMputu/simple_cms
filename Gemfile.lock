@@ -91,6 +91,7 @@ GEM
     ffi (1.12.2)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
+    gmaps4rails (2.1.2)
     google-api-client (0.38.0)
       addressable (~> 2.5, >= 2.5.1)
       googleauth (~> 0.9)
@@ -280,6 +281,7 @@ DEPENDENCIES
   bootstrap (~> 4.4.1)
   byebug
   capybara (>= 2.15)
+  gmaps4rails
   google-cloud-storage (~> 1.11)
   image_processing (~> 1.2)
   irb (~> 1.2.3)
