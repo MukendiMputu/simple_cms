@@ -1,3 +1,7 @@
+function jsRoar(name) {
+    alert('I am ' + name  + '. Hear me roar!');
+}
+
 function myMap() {
     var map;
     var mapProp = {
