@@ -36,19 +36,24 @@
     </aside><!-- end of user-info -->
     <hr class="sr-only"/>
     <article id="section" class="col-lg-9 float-left">
-        <section id="main">
-            <div id="mp_tabs" role="menu" class="">
-                <nav class="nav nav-tabs">
-                    <%= link_to("Overview", "#my_bookings", :class => "nav-item p-3")%>
-                    <%= link_to("Invitation", "#my_invitation", :class => "nav-item p-3")%>
-                    <%= link_to("Messages", "#my_msg", :class => "nav-item p-3")%>
-                </nav>
-            </div>
-            <div id="my_bookings" aria-label="my bookings" class="mt-lg-3 mt-mg-3">
-                <div id="overvPanel" class="showable">
-                    <h2>My <%= pluralize( @user.bookings.size ,"Event") %></h2>
-                    <p><%= link_to("Add new booking", "#")%></p>
-                    <% @user.bookings.each do |booking| %>
+        <div id="mp_tabs" role="menu" class="mb-lg-3 mb-mg-3 ">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <%= link_to("Overview", "#my_bookings", :class => "nav-link active", :data => {toggle: "tab"}, :role=>"tab", :aria =>{controls: "overview", selected: "true"})%>
+                </li>
+                <li class="nav-item">
+                    <%= link_to("Invitation", "#my_invitation", :class => "nav-link", :data => {toggle: "tab"}, :role=>"tab", :aria =>{controls: "invitation", selected: "false"})%>
+                </li>
+                <li class="nav-item">
+                    <%= link_to("Messages", "#my_msg", :class => "nav-link", :data => {toggle: "tab"}, :role=>"tab", :aria =>{controls: "messages", selected: "false"})%>
+                </li>
+            </ul>
+        </div>
+        <div class="tab-content">
+            <section id="my_bookings" class="tab-pane fade show active" aria-label="my bookings">
+                <h2>My <%= pluralize( @user.bookings.size ,"Event") %></h2>
+                <p><%= link_to("Add new booking", "#")%></p>
+                <% @user.bookings.each do |booking| %>
                     <div class="card" aria-label="room thumbnail">
                         <div class="room_thumbnail booking-thumbnail">
                         <%= image_tag("480/#{booking.room.picture}", :class =>"img_widget", :alt => "avatar default picture")%>
@@ -67,13 +72,9 @@
                         <% end %>
                         <p style="color:#452113;"><%= link_to("Add note", '#', :class => 'add_note') %></p>
                     </div>
-                    <hr />
-                    <% end %>
-                </div>
-            </div>
-        </section>
-        <section id="my_invitation", aria-label="my invitation">
-            <div id="overvPanel" class="showable">
+                <% end %>
+            </section>
+            <section id="my_invitation" class="tab-pane fade" role="tabpanel" aria-labelledby="invitation-tab">
                 <h2>Invitations</h2>
                 <div id="guest_list" aria-label="guest list">
                     <ol>
@@ -96,15 +97,13 @@
                         <% end %>
                     <ol>
                 </div>
-            </div>
-        </section>
-        <section id="my_msg", aria-label="my messages">
-            <div id="overvPanel" class="showable">
+            </section>
+            <section id="my_msgt" class="tab-pane fade" role="tabpanel" aria-labelledby="message-tab">
                 <h2>Messages</h2>
                 <p><%= link_to("Write Message", "#")%></p>
                 <div id="msg_list" aria-label="all messages">
                 </div>
-            </div>
-        </section>
+            </section>
+        </div>
     </article>
 </main>
