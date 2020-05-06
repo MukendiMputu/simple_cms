@@ -12,7 +12,6 @@ require("channels")
 //= require popper
 //= require bootstrap-sprockets
 
-//= require gmaps/google
 
 
 // Uncomment to copy all static images under ../images to the output folder and reference

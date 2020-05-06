@@ -31,7 +31,6 @@ class LoginController < ApplicationController
   
   def show
     @user = User.find(params[:id])
-    flash[:notice] = "Welcome #{@user.first_name}"
     
   end
 

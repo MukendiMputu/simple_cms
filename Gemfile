@@ -29,9 +29,6 @@ gem 'will_paginate', '~> 3.3.0'
 gem 'bootstrap', '~> 4.4.1'
 gem 'jquery-rails'
 
-# Use google maps
-gem 'gmaps4rails'
-
 # Use irb as console
 gem 'irb', '~> 1.2.3'
 

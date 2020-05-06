@@ -1,6 +1,7 @@
    <% @page_title = 'Home'%> 
     <!-- [ HEADER ] -->
     <header id="header" aria-label="page header">
+    <% if session[:user_id].blank? %>
       <nav class="fixed-top navbar navbar-expand-lg navbar-dark bg-dark" aria-label="navigation menu">
         <div id="page_heading" class="float-left col-lg-2" aria-label="page heading">
             <%= link_to(root_path, :role => 'link', :class => 'navbar-brand') do %>
@@ -34,7 +35,7 @@
             <li class="nav-item list-inline-item"><%= link_to("Contact", "#", :class => 'nav-link') %></li>
           </ul>
         </div>
-        
+          
         <!--[ LOGIN ]-->
         <div id="login_main" class="d-none d-sm-block col-lg-6" aria-label="login pane">
           <div id="login" class="" >
@@ -72,8 +73,11 @@
                 &nbsp;&nbsp; <%= link_to("Sign up", new_user_path, :class => 'btn btn-secondary mb-2') %>
               </span>
             <% end %>
-          </div>
+        </div>
       </nav>
+    <% else %>
+      <%= show_logged_header(@user) %>
+    <% end %>
 
       <!--[ BANNER ]-->
       <!-- the picture allows much more options -->
