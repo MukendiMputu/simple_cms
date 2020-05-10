@@ -29,5 +29,14 @@ $jet: rgba(49, 47, 47, 1);
     margin: auto;
 }
 
+.card-img-overlay-bottom {
+
+    position: absolute;
+    right: 1.25rem;
+    bottom: 1.0rem;
+    left: 1.25rem;
+
+}
+
 // Custom bootstrap variables must be set or imported *before* bootstrap.
 @import "bootstrap";
