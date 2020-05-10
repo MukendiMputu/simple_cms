@@ -22,5 +22,12 @@ $amazon: rgba(85, 133, 100, 1);
 $dark_liver: rgba(86, 73, 70, 1);
 $jet: rgba(49, 47, 47, 1);
 
+.form-signin {
+    width: 100%;
+    max-width: 330px;
+    padding: 15px;
+    margin: auto;
+}
+
 // Custom bootstrap variables must be set or imported *before* bootstrap.
 @import "bootstrap";

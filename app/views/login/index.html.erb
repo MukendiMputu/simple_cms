@@ -1,42 +1,37 @@
 <% @page_title = 'Signin'%>
-<div id="section">
-  <div id="main_pane">
-    <div id="mp_titel" class="text-center"><h3>LOGIN</h3></div>
-      <div class="panes">
-        <% if !flash[:error].blank? %>
-        <div class = "error">
-          <%= flash[:error] %>
-        </div>
-        <% end %>
-        <% if !flash[:notice].blank? %>
-        <div class = "notice">
-          <%= flash[:notice] %>
-        </div>
-        <% end %>
-        <% if !flash[:alert].blank? %>
-        <div class = "alert">
-          <%= flash[:alert] %>
-        </div>
-        <% end %>
-        <div id="login" class="">
-            <%= form_with(:url => '/login', :method => 'post', :class => 'form-validate') do |form| %>
-            <table summary="login form">
-              <tr>
-                <td><%= form.label(:email, :class => 'form-label')%></td>
-                <td><%= form.email_field(:email, placeholder: "e.g. name@address.com", :class => 'form-input')%></td>
-              </tr>
-              <tr>      
-                <td><%= form.label(:password, :class => 'form-label')%></td>
-                <td><%= form.password_field(:password, placeholder: "Enter your password", :class => 'form-input')%></td>
-              </tr>
-              <tr>
-                <td><%= form.submit('Sign in', :class => 'btn-primary medium btn-submit') %></td>
-              </tr>
-            </table>     
-            <% end %>
-            <hr>
-            <p class="">or <%= link_to("create a new account", new_user_path) %></p>
-        </div>
-      </div><!-- end of event pane -->
-  </div> <!-- end of main pane -->
-</div>
+<section class="text-center d-flex py-5">
+  <%= form_with(:url => '/login', :method => 'post', :class => 'form-signin m-auto') do |form| %>
+  <% if !flash[:error].blank? %>
+  <div class = "alert alert-danger">
+    <%= flash[:error] %>
+  </div>
+  <% end %>
+  <% if !flash[:notice].blank? %>
+  <div class = "alert alert-success">
+    <%= flash[:notice] %>
+  </div>
+  <% end %>
+  <% if !flash[:alert].blank? %>
+  <div class = "alert">
+    <%= flash[:alert] %>
+  </div>
+  <% end %>
+  <%= image_tag("100/conference_room_light.jpg", :size => '100x100', :class =>"mb-4", :alt => "conference room")%>
+  <h1 class="h3 mb-3 font-weight-normal">Login</h1>
+  <%= form.label(:email, :class => 'sr-only')%>
+    <%= form.email_field(:email, placeholder: "e.g. name@address.com", :class => 'form-control', :required => 'true', :autofocus => 'true')%>
+    <%= form.label(:password, :class => 'sr-only')%>
+    <%= form.password_field(:password, placeholder: "Enter your password", :class => 'form-control', :required => 'true')%>
+    <div class="checkbox my-3">
+      <label>
+        <input type="checkbox" value="remember-me"> Remember me
+      </label>
+    </div>
+    <%= form.submit('Sign in', :class => 'btn btn-lg btn-primary btn-block') %>
+  <hr class="sr-only"/>
+  <p class="mt-3">or <%= link_to("create a new account", new_user_path) %></p>
+  <p class="my-5 text-muted">&copy; 2020</p>
+  <% end %>
+</section>
+
+

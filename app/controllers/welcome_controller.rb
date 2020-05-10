@@ -2,7 +2,7 @@ class WelcomeController < ApplicationController
   
   def index
     @users = User.all
-    @bookings = Booking.newest_first
+    @bookings = Booking.all
     @rooms = Room.ordered
     
   end
