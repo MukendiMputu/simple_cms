@@ -166,7 +166,7 @@
                         <% unless booking.user.picture.attached? %>
                           <%= image_tag("100/avatar_default.png", :class =>"rounded-circle img-thumbnail w-25 mr-2", :alt => " #{booking.user.nickname} ")%>
                         <% else %>  
-                          <%= image_tag(booking.user.picture, :class =>"rounded-circle img-thumbnail w-25 mr-2", :alt => " #{booking.user.nickname} ") %>
+                          <%= image_tag(booking.user.thumbnail, :class =>"rounded-circle img-thumbnail mr-2", :alt => " #{booking.user.nickname} ") %>
                         <% end %>
                         <div class="media-body"><%= booking.user.nickname %></div>
                       </div>

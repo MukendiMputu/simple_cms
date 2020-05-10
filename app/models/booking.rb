@@ -11,4 +11,9 @@ class Booking < ApplicationRecord
     scope :newest_first, lambda { order("created_at DESC") }
     scope :search, ->(query) { where(["agenda LIKE ?", "%#{query}%"])}
     scope :date_is, ->(query) { where("date LIKE ?", "%#{query}%")}
+
+    def thumbnail
+        return se
+    end
+
 end

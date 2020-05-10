@@ -31,6 +31,10 @@ class User < ApplicationRecord
     validates :password,    :presence => true,
                             :length => {:within => 8..16},
                             :confirmation => true,
-                            :on => :create
+                            :on => :create 
+
+    def thumbnail
+        return self.picture.variant(:resize => '77x77!').processed
+    end
     
 end
