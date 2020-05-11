@@ -101,7 +101,7 @@
           <div id="swiper" class="row flex-md-nowrap overflow-hidden">
               <% @rooms.each do |room| %>
 	          <div id="room_panorama" class="col-sm-4">
-              <div class="card mb-md-2">
+              <div class="card mb-md-2 shadow-sm">
                 <picture id="room_thumbnail" role="img" aria-label="room thumbnail">
                   <source media="(min-width:600px)" srcset="<%= asset_path("480/#{room.picture}", type: :image) %>">
                   <img alt="conference room number <%= room.number %>" class="card-img-top " src="<%= asset_path("480/#{room.picture}", type: :image) %>"/>
@@ -155,10 +155,10 @@
           <% end %>
           <br />
           <div>
-	          <div id="room_panorama" class="row flex-md-nowrap overflow-y-scroll">
+	          <div id="room_panorama" class="row flex-md-nowrap overflow-auto">
               <% @bookings.each do |booking| %>
               <div id="room_panorama" class="col-sm-4">
-                <div class="card" >
+                <div class="card shadow-sm" >
                   <div class="card-img-top position-relative">
                     <img alt="conference room number <%= booking.room.number %>" class="w-100" src="<%= asset_path("480/#{booking.room.picture}", type: :image) %>"/>
                     <div class="card-img-overlay-bottom">
