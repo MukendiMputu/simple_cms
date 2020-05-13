@@ -1,83 +1,7 @@
    <% @page_title = 'Home'%> 
     <!-- [ HEADER ] -->
     <header id="header" aria-label="page header">
-    <% if session[:user_id].blank? %>
-      <nav class="fixed-top navbar navbar-expand-lg navbar-dark bg-dark" aria-label="navigation menu">
-        <div id="page_heading" class="float-left col-lg-2" aria-label="page heading">
-            <%= link_to(root_path, :role => 'link', :class => 'navbar-brand') do %>
-              <%= image_tag('100/conference_room.png', :size => '80x80') %>
-              <span class="d-inline">Conference Room</span>
-            <% end %>
-        </div>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="float-left col-lg-4">
-          <ul class="list-inline navbar-nav" aria-label="navigation options">
-            <li class="nav-item list-inline-item active">
-              <%= link_to("#", :class => 'nav-link') do %>
-              Home
-              <span class="sr-only">(current)</span>
-              <% end %>
-            </li>
-            <li class="nav-item list-inline-item dropdown">
-              <%= link_to("#", :class => 'nav-link dropdown-toggle', :id => "navbarDropdownMenuLink", :role => "button", :data => {toggle: "dropdown"}, :aria => {haspopup: "true", expanded: "false"}) do %>
-                Services
-              <% end %>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
-            </div>
-            </li>
-            <li class="nav-item list-inline-item"><%= link_to("About", "#", :class => 'nav-link') %></li>
-            <li class="nav-item list-inline-item"><%= link_to("Contact", "#", :class => 'nav-link') %></li>
-          </ul>
-        </div>
-          
-        <!--[ LOGIN ]-->
-        <div id="login_main" class="d-none d-sm-block col-lg-6" aria-label="login pane">
-          <div id="login" class="" >
-            <% if !flash[:notice].blank? %>
-            <div class = "alert alert-info" role="alert" aria-label="application notification message">
-                <%= flash[:notice] %>
-            </div>
-            <% end %>
-            <% if !flash[:error].blank? %>
-            <div class = "alert alert-danger" role="alert" aria-label="application error message">
-                <%= flash[:error] %>
-            </div>
-            <% end %>
-            <% if !flash[:alert].blank? %>
-            <div class = "alert alert-warning" role="alert" aria-label="application alert message">
-                <%= flash[:alert] %>
-            </div>
-            <% end %>
-            <%= form_with(:url => '/login', :method => 'post', :class => 'form-inline justify-content-end') do |form| %>
-              <%= form.label(:email, :class => 'sr-only')%>
-              <div class="input-group mb-2 mr-sm-2">
-                <div class="input-group-prepend">
-                  <div class="input-group-text">@</div>
-                </div>
-                <%= form.email_field(:email, placeholder: "e.g. name@address.com", :class => 'form-control')%>
-              </div>
-              <%= form.label(:password, :class => 'sr-only')%>
-              <%= form.password_field(:password, placeholder: "Enter your password", :class => 'form-control mb-2 mr-sm-2')%>
-              <div class="form-check mb-2 mr-sm-2">
-                <%= form.check_box(:ckeckBox, :class => 'form-check-input') %>
-                <%= form.label(:checkBox, 'Remember me', :class => 'form-check-label text-light')%>
-              </div>
-              <%= form.submit('Sign in', :class => 'btn btn-light mb-2') %>
-              <span id="para_account" >
-                &nbsp;&nbsp; <%= link_to("Sign up", new_user_path, :class => 'btn btn-secondary mb-2') %>
-              </span>
-            <% end %>
-        </div>
-      </nav>
-    <% else %>
-      <%= show_logged_header(@user) %>
-    <% end %>
+      <%= show_default_header(@user) %>
 
       <!--[ BANNER ]-->
       <!-- the picture allows much more options -->
@@ -98,7 +22,7 @@
             <h2>Our Rooms</h2>
           </div>
 
-          <div id="swiper" class="row row-cols-3 flex-md-nowrap overflow-hidden">
+          <div id="swiper" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 flex-md-nowrap overflow-hidden">
               <% @rooms.each do |room| %>
               <div class="card mb-2 mx-3 shadow-sm">
                 <picture id="room_thumbnail" role="img" aria-label="room thumbnail">
@@ -153,7 +77,7 @@
           <% end %>
           <br />
           <div class="position-relative overflow-hidden position-relative overflow-hidden mb-6 mr-n3 mr-sm-n5 mr-xl-n5 ml-n3 ml-sm-n5 ml-lg-m3 ml-xl-n5 mt-3 ">
-	          <div id="room_panorama" class="row row-cols-3 flex-nowrap px-3 px-sm-5 px-lg-3 px-xl-5 overflow-auto">
+	          <div id="room_panorama" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 flex-nowrap px-3 px-sm-5 px-lg-3 px-xl-5 overflow-auto">
               <% @bookings.each do |booking| %>
                 <div class="card mb-3 mx-3 shadow-sm" >
                   <div class="card-img-top position-relative">

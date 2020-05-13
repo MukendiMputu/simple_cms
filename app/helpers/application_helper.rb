@@ -8,10 +8,20 @@ module ApplicationHelper
         )
     end
 
-    def show_logged_header(object)
+    def show_logged_header()
         render(
-            :partial => 'application/logged_header',
+            :partial => 'application/logged_header'
+        )
+    end
+
+    def show_default_header(object)
+        render(
+            :partial => 'application/header',
             :locals => {:object => object}
         )
+    end
+
+    def is_logged_in()
+        return session[:user_id].present?
     end
 end

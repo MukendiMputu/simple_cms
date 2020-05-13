@@ -39,4 +39,6 @@ $jet: rgba(49, 47, 47, 1);
 }
 
 // Custom bootstrap variables must be set or imported *before* bootstrap.
+// "bootstrap-sprockets" must be imported before "bootstrap" and "bootstrap/variables"
+    
 @import "bootstrap";
