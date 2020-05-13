@@ -16,7 +16,9 @@
     <%= flash[:alert] %>
   </div>
   <% end %>
-  <%= image_tag("100/conference_room_light.jpg", :size => '100x100', :class =>"mb-4", :alt => "conference room")%>
+  <%= link_to(root_path, :role => 'link', :class => '') do %>
+    <%= image_tag("100/conference_room_light.jpg", :size => '100x100', :class =>"mb-4", :alt => "conference room")%>
+  <% end %>
   <h1 class="h3 mb-3 font-weight-normal">Login</h1>
   <%= form.label(:email, :class => 'sr-only')%>
     <%= form.email_field(:email, placeholder: "e.g. name@address.com", :class => 'form-control', :required => 'true', :autofocus => 'true')%>

@@ -5,7 +5,7 @@
               <span class="d-none d-sm-inline">Conference Room</span>
             <% end %>
         </div>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
 
@@ -19,8 +19,7 @@
                 <% end %>
               </li>
               <li class="nav-item list-inline-item dropdown">
-            <a id="navbarDropdownMenuLink" 
-              class="nav-link dropdown-toggle" 
+            <a id="navbarDropdownMenuLink" class="nav-link dropdown-toggle" 
               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="button" href="#">Services</a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                 <a class="dropdown-item" href="#">Action</a>
@@ -40,44 +39,61 @@
             </ul>
           </div>
         <% else %>
-      
+          <!-- Button trigger modal -->
+          <button type="button" class="btn btn-light" data-toggle="modal" data-target="#login">
+            Sign in
+          </button>
           <!--[ LOGIN ]-->
-          <div id="login_main" class="d-none d-sm-block" aria-label="login pane">
-          <div id="login" class="" >
-              <% if !flash[:notice].blank? %>
-              <div class = "alert alert-info" role="alert" aria-label="application notification message">
-                  <%= flash[:notice] %>
-              </div>
-              <% end %>
-              <% if !flash[:error].blank? %>
-              <div class = "alert alert-danger" role="alert" aria-label="application error message">
-                  <%= flash[:error] %>
-              </div>
-              <% end %>
-              <% if !flash[:alert].blank? %>
-              <div class = "alert alert-warning" role="alert" aria-label="application alert message">
-                  <%= flash[:alert] %>
-              </div>
-              <% end %>
-              <%= form_with(:url => '/login', :method => 'post', :class => 'form-inline justify-content-end') do |form| %>
-              <%= form.label(:email, :class => 'sr-only')%>
-              <div class="input-group  mr-sm-2">
-                  <div class="input-group-prepend">
-                  <div class="input-group-text">@</div>
+          <div id="login" class="modal fade" aria-label="login pane" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="true" >
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="signInModalLabel">Sign in</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <% if !flash[:notice].blank? %>
+                  <div class = "alert alert-info" role="alert" aria-label="application notification message">
+                      <%= flash[:notice] %>
                   </div>
-                  <%= form.email_field(:email, placeholder: "e.g. name@address.com", :class => 'form-control')%>
+                  <% end %>
+                  <% if !flash[:error].blank? %>
+                  <div class = "alert alert-danger" role="alert" aria-label="application error message">
+                      <%= flash[:error] %>
+                  </div>
+                  <% end %>
+                  <% if !flash[:alert].blank? %>
+                  <div class = "alert alert-warning" role="alert" aria-label="application alert message">
+                      <%= flash[:alert] %>
+                  </div>
+                  <% end %>
+                  <%= form_with(:url => '/login', :method => 'post', :class => '') do |form| %>
+                  <%= form.label(:email, :class => 'sr-only')%>
+                  <div class="input-group  mr-sm-2">
+                      <div class="input-group-prepend">
+                        <div class="input-group-text">@</div>
+                      </div>
+                      <%= form.email_field(:email, placeholder: "e.g. name@address.com", :class => 'form-control')%>
+                  </div>
+                  <%= form.label(:password, :class => 'sr-only')%>
+                  <%= form.password_field(:password, placeholder: "Enter your password", :class => 'form-control  mr-sm-2')%>
+                  <div class="form-check  mr-sm-2">
+                    <%= form.check_box(:ckeckBox, :class => 'form-check-input') %>
+                    <%= form.label(:checkBox, 'Remember me', :class => 'form-check-label text-light')%>
+                  </div>
+                  <%= form.submit('Sign in', :class => 'btn btn-light ') %>
+                  <% end %>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
               </div>
-              <%= form.label(:password, :class => 'sr-only')%>
-              <%= form.password_field(:password, placeholder: "Enter your password", :class => 'form-control  mr-sm-2')%>
-              <div class="form-check  mr-sm-2">
-                  <%= form.check_box(:ckeckBox, :class => 'form-check-input') %>
-                  <%= form.label(:checkBox, 'Remember me', :class => 'form-check-label text-light')%>
-              </div>
-              <%= form.submit('Sign in', :class => 'btn btn-light ') %>
-              <span id="para_account" >
-                  &nbsp;&nbsp; <%= link_to("Sign up", new_user_path, :class => 'btn btn-secondary ') %>
-              </span>
-              <% end %>
+            </div>
           </div>
+          <span id="para_account" >
+              &nbsp;&nbsp; <%= link_to("Sign up", new_user_path, :class => 'btn btn-secondary ') %>
+          </span>
         <% end %>
       </nav>

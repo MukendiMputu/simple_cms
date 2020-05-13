@@ -8,11 +8,6 @@ module ApplicationHelper
         )
     end
 
-    def show_logged_header()
-        render(
-            :partial => 'application/logged_header'
-        )
-    end
 
     def show_default_header(object)
         render(
