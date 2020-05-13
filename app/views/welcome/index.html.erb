@@ -98,10 +98,9 @@
             <h2>Our Rooms</h2>
           </div>
 
-          <div id="swiper" class="row flex-md-nowrap overflow-hidden">
+          <div id="swiper" class="row row-cols-3 flex-md-nowrap overflow-hidden">
               <% @rooms.each do |room| %>
-	          <div id="room_panorama" class="col-sm-4">
-              <div class="card mb-md-2 shadow-sm">
+              <div class="card mb-2 mx-3 shadow-sm">
                 <picture id="room_thumbnail" role="img" aria-label="room thumbnail">
                   <source media="(min-width:600px)" srcset="<%= asset_path("480/#{room.picture}", type: :image) %>">
                   <img alt="conference room number <%= room.number %>" class="card-img-top " src="<%= asset_path("480/#{room.picture}", type: :image) %>"/>
@@ -117,7 +116,6 @@
                   <%= link_to('View more', '#', :class => 'btn btn-secondary') %>
                 </div>
               </div>
-            </div>
               <% end %>
           </div>
         </section>
@@ -154,23 +152,10 @@
           </div>
           <% end %>
           <br />
-          <div class="position-relative overflow-hidden 
-      position-relative
-      overflow-hidden
-      mb-6
-      mr-n3
-      mr-sm-n5
-      mr-xl-n5
-      ml-n3
-      ml-sm-n5
-      ml-lg-m3
-      ml-xl-n5
-      mt-3
-    ">
-	          <div id="room_panorama" class="row flex-nowrap px-3 px-sm-5 px-lg-3 px-xl-5 overflow-auto">
+          <div class="position-relative overflow-hidden position-relative overflow-hidden mb-6 mr-n3 mr-sm-n5 mr-xl-n5 ml-n3 ml-sm-n5 ml-lg-m3 ml-xl-n5 mt-3 ">
+	          <div id="room_panorama" class="row row-cols-3 flex-nowrap px-3 px-sm-5 px-lg-3 px-xl-5 overflow-auto">
               <% @bookings.each do |booking| %>
-              <div id="room_panorama" class="col-sm-4 mb-3">
-                <div class="card shadow-sm" >
+                <div class="card mb-3 mx-3 shadow-sm" >
                   <div class="card-img-top position-relative">
                     <img alt="conference room number <%= booking.room.number %>" class="w-100" src="<%= asset_path("480/#{booking.room.picture}", type: :image) %>"/>
                     <div class="card-img-overlay-bottom">
@@ -191,7 +176,6 @@
                     <dd><%= link_to('View more', '#', :class => 'btn btn-secondary') %></dd>
                   </dl>
                 </div>
-              </div>
               <% end %>
             </div>
             <div class="position-absolute px-2 px-sm-3 px-lg-2 px-xl-3" style="left: 0; top: 0; bottom:0; background: linear-gradient(to right, rgb(255, 255, 255, 1), rgba(255,255,255,0));"></div>

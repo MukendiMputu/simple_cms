@@ -1,5 +1,5 @@
 <header id="header" aria-label="page header">
-      <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="navigation menu">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark row-cols-2" aria-label="navigation menu">
         <div id="page_heading" class="float-left col-lg-2" aria-label="page heading">
             <%= link_to(root_path, :role => 'link', :class => 'navbar-brand') do %>
               <%= image_tag('100/conference_room.png', :size => '80x80') %>
@@ -10,33 +10,35 @@
           <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="float-left col-lg-6">
-          <ul class="list-inline navbar-nav" aria-label="navigation options">
-            <li class="nav-item list-inline-item active">
-              <%= link_to(root_path, :class => 'nav-link') do %>
-              Home
-              <span class="sr-only">(current)</span>
-              <% end %>
-            </li>
-            <li class="nav-item list-inline-item dropdown">
-              <%= link_to("#", :class => 'nav-link dropdown-toggle', :id => "navbarDropdownMenuLink", :role => "button", :data => {toggle: "dropdown"}, :aria => {haspopup: "true", expanded: "false"}) do %>
-                Services
-              <% end %>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
-            </div>
-            </li>
-            <li class="nav-item list-inline-item"><%= link_to("About", "#", :class => 'nav-link') %></li>
-            <li class="nav-item list-inline-item"><%= link_to("Contact", "#", :class => 'nav-link') %></li>
-          </ul>
-        </div>
-        <div id="h_side-nav" class="col-lg-4 d-flex justify-content-end">
-            <ul id="side-nav" class="nav">
-                <li class="nav-item"><%= link_to("Dashboard", login_path(session[:user_id]), :class => "nav-link")%></li>
-                <li class="nav-item"><%= link_to("Signout", delete_login_path(session[:user_id]), :class => "nav-link btn btn-light ")%></li>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <div class="float-left col-lg-6">
+            <ul class="list-inline navbar-nav" aria-label="navigation options">
+              <li class="nav-item list-inline-item active">
+                <%= link_to(root_path, :class => 'nav-link') do %>
+                Home
+                <span class="sr-only">(current)</span>
+                <% end %>
+              </li>
+              <li class="nav-item list-inline-item dropdown">
+                <%= link_to("#", :class => 'nav-link dropdown-toggle', :id => "navbarDropdownMenuLink", :role => "button", :data => {toggle: "dropdown"}, :aria => {haspopup: "true", expanded: "false"}) do %>
+                  Services
+                <% end %>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <a class="dropdown-item" href="#">Something else here</a>
+              </div>
+              </li>
+              <li class="nav-item list-inline-item"><%= link_to("About", "#", :class => 'nav-link') %></li>
+              <li class="nav-item list-inline-item"><%= link_to("Contact", "#", :class => 'nav-link') %></li>
             </ul>
+          </div>
+          <div id="h_side-nav" class="col-lg-4 d-flex justify-content-end">
+              <ul id="side-nav" class="nav">
+                  <li class="nav-item"><%= link_to("Dashboard", login_path(session[:user_id]), :class => "nav-link")%></li>
+                  <li class="nav-item"><%= link_to("Signout", delete_login_path(session[:user_id]), :class => "nav-link btn btn-light ")%></li>
+              </ul>
+          </div>
         </div>
       </nav>
     </header>
