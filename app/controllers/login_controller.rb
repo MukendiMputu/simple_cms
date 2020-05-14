@@ -36,7 +36,7 @@ class LoginController < ApplicationController
 
   def delete
     session[:user_id] = nil
-    flash[:notice] = "You've been logged out successfully! Click icon to go back to homepage"
+    flash[:notice] = "You've been logged out successfully!"
     redirect_to(login_index_path)
   end
 
