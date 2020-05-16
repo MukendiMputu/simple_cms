@@ -73,10 +73,10 @@
                   <%= form_with(:url => '/login', :method => 'post', :class => '') do |form| %>
                   <%= form.label(:email, :class => 'sr-only')%>
                   <div class="input-group  mr-sm-2">
-                      <div class="input-group-prepend">
+                      <%= form.email_field(:email, placeholder: "e.g. name@address.com", :class => 'form-control')%>
+                      <div class="input-group-append">
                         <div class="input-group-text">@</div>
                       </div>
-                      <%= form.email_field(:email, placeholder: "e.g. name@address.com", :class => 'form-control')%>
                   </div>
                   <%= form.label(:password, :class => 'sr-only')%>
                   <%= form.password_field(:password, placeholder: "Enter your password", :class => 'form-control  mr-sm-2')%>
