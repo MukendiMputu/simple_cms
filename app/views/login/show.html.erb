@@ -1,6 +1,6 @@
 <% if session[:user_id].present? %>
     <% @page_title = @user.nickname %>
-    <%= show_default_header(@user) %>
+    <%= show_default_header %>
 <% end %>
 <main class="container-md mt-lg-5 mt-md-3">
     <% if !flash[:notice].blank? %>

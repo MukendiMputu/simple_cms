@@ -1,5 +1,5 @@
 class LoginController < ApplicationController
-
+  before_action :confirm_logged_in, :except => [:index, :create, :delete]
   def index
     # Just renders the signin form
   end
@@ -41,5 +41,10 @@ class LoginController < ApplicationController
   end
 
   private
-
+    def confirm_logged_in
+      unless session[:user_id]
+        flash[:alert] = "Please, log in first to get access to this area."
+        redirect_to(login_index_path)
+      end
+    end
 end

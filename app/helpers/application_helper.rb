@@ -9,11 +9,8 @@ module ApplicationHelper
     end
 
 
-    def show_default_header()
-        render(
-            :partial => 'application/header',
-            :locals => {:object => ''}
-        )
+    def show_default_header
+        render(:partial => 'application/header')
     end
 
     def is_logged_in()

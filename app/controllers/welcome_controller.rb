@@ -9,7 +9,7 @@ class WelcomeController < ApplicationController
   def search_booking
     @bookings = Booking.date_is(params[:date])
     logger.debug(@bookings)
-    render(:controller => 'welcome', :template => 'index')
+    render('index')
     
   end
   

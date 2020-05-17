@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
    
+  before_action :confirm_logged_in, :except => [:new, :create]
+
   def new
     # Just shows the signup form
     @user = User.new
@@ -54,6 +56,13 @@ class UsersController < ApplicationController
         :password,
         :password_confirmation # respect rails naming convention!!
       )
+    end
+    
+    def confirm_logged_in
+      unless session[:user_id]
+        flash[:alert] = "Please, log in first to get access to this area."
+        redirect_to(login_index_path)
+      end
     end
 
 end
