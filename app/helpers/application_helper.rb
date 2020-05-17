@@ -9,10 +9,10 @@ module ApplicationHelper
     end
 
 
-    def show_default_header(object)
+    def show_default_header()
         render(
             :partial => 'application/header',
-            :locals => {:object => object}
+            :locals => {:object => ''}
         )
     end
 

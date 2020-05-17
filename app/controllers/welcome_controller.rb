@@ -1,16 +1,22 @@
 class WelcomeController < ApplicationController
   
+  before_action :get_data, :only => [:index]
+
   def index
-    @users = User.all
-    @bookings = Booking.oldest_first
-    @rooms = Room.ordered
     
   end
-  
-  
   
   def search_booking
     @bookings = Booking.date_is(params[:date])
+    logger.debug(@bookings)
+    render(:controller => 'welcome', :template => 'index')
     
   end
+  
+  private
+  
+    def get_data
+      @bookings = Booking.oldest_first
+      @rooms = Room.ordered
+    end
 end
