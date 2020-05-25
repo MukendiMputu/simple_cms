@@ -80,7 +80,7 @@
 	          <div id="room_panorama" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 flex-nowrap px-3 px-sm-5 px-lg-3 px-xl-5 overflow-auto">
               <% @bookings.each do |booking| %>
                 <div class="card mb-3 mx-3 shadow-sm" >
-                  <div class="card-img-top position-relative">
+                  <div class="card-img-top position-relative dark-gradient">
                     <img alt="conference room number <%= booking.room.number %>" class="w-100" src="<%= asset_path("480/#{booking.room.picture}", type: :image) %>"/>
                     <div class="card-img-overlay-bottom">
                       <div class="media text-sm text-white align-items-center">
