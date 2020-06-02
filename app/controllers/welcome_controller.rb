@@ -1,6 +1,6 @@
 class WelcomeController < ApplicationController
   
-  before_action :get_data, :only => [:index]
+  before_action :get_data, :only => [:index, :search_booking]
 
   def index
     
@@ -8,7 +8,12 @@ class WelcomeController < ApplicationController
   
   def search_booking
     @bookings = Booking.date_is(params[:date])
-    logger.debug(@bookings)
+    logger.debug("++++++++++++ [ DEBUGGING ] ++++++++++++")
+    @bookings.each do |b|
+      logger.debug(b.agenda)
+    end
+    logger.debug("+++++++++++++++++++++++++++++++++++++++")
+    
     render('index')
     
   end

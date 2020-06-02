@@ -48,6 +48,7 @@
             <p class="mb-0 text-uppercase text-monospace font-weight-bold text-primary"><%= time_tag(Date.today, :id => 'dp_date') %></p>
             <h2>Availabilities</h2>
           </div>
+          <!--[ SEARCH BAR ]-->
           <div id="date_picker" class="search-bar mt-5 p-1 p-lg-1 pl-lg-4" >
             <%= form_with(:url => {:action => :search_booking}, :method => "post", :class => '') do %>
             <div class="row">
@@ -76,6 +77,7 @@
           </div>
           <% end %>
           <br />
+          <!--[ AVAILABILITIES ]-->
           <div class="position-relative overflow-hidden position-relative overflow-hidden mb-6 mr-n3 mr-sm-n5 mr-xl-n5 ml-n3 ml-sm-n5 ml-lg-m3 ml-xl-n5 mt-3 ">
 	          <div id="room_panorama" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 flex-nowrap px-3 px-sm-5 px-lg-3 px-xl-5 overflow-auto">
               <% @bookings.each do |booking| %>
