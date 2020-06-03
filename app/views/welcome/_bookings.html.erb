@@ -1,0 +1,30 @@
+
+<% unless @bookings.any? %>
+    <% @bookings.each do |booking| %>
+        <div class="card mb-3 mx-3 shadow-sm" >
+            <div class="card-img-top position-relative dark-gradient">
+                <img alt="conference room number <%= booking.room.number %>" class="w-100" src="<%= asset_path("480/#{booking.room.picture}", type: :image) %>"/>
+                <div class="card-img-overlay-bottom">
+                <div class="media text-sm text-white align-items-center">
+                    <% unless booking.user.picture.attached? %>
+                    <%= image_tag("100/avatar_default.png", :class =>"rounded-circle img-thumbnail w-25 mr-2", :alt => " #{booking.user.nickname} ")%>
+                    <% else %>  
+                    <%= image_tag(booking.user.thumbnail, :class =>"rounded-circle img-thumbnail mr-2", :alt => " #{booking.user.nickname} ") %>
+                    <% end %>
+                    <div class="media-body"><%= booking.user.nickname %></div>
+                </div>
+                </div>
+            </div>
+            <dl class="card-body" >
+                <dt class="card-title"><%= booking.agenda %></dt>
+                <dd>Date:  <%= booking.date.to_formatted_s(:long_ordinal) %></dd>
+                <dd>Time:  <%= booking.start_time.to_formatted_s(:time) %> - <%= booking.end_time.to_formatted_s(:time)%></dd>
+                <dd><%= link_to('View more', '#', :class => 'btn btn-secondary') %></dd>
+            </dl>
+        </div>
+    <% end %>
+<% else %>
+    <div class="alert alert-light border rounded-pill mx-auto text-center" role="alert">
+        Your search yield an empty result set!
+    </div>
+<% end %>

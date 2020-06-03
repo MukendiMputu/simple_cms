@@ -71,7 +71,7 @@
                 <%= time_field_tag(:end_time, (Time.now.advance(hours: 6)).strftime("%H:%M"), :step => 1800, :min => "06:00", :max => "22:00", :class => "form-control border-0 shadow-0") %>
               </div>
               <div class="col-lg-2">  
-                <%= submit_tag("SEARCH", :class => 'btn btn-primary btn-block rounded-pill') %>
+                <%= submit_tag("SEARCH", :class => 'btn btn-primary btn-block rounded-pill', :data => {:disable_with => "SEARCHING..."}) %>
               </div>
             </div>
           </div>
@@ -80,29 +80,7 @@
           <!--[ AVAILABILITIES ]-->
           <div class="position-relative overflow-hidden position-relative overflow-hidden mb-6 mr-n3 mr-sm-n5 mr-xl-n5 ml-n3 ml-sm-n5 ml-lg-m3 ml-xl-n5 mt-3 ">
 	          <div id="room_panorama" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 flex-nowrap px-3 px-sm-5 px-lg-3 px-xl-5 overflow-auto">
-              <% @bookings.each do |booking| %>
-                <div class="card mb-3 mx-3 shadow-sm" >
-                  <div class="card-img-top position-relative dark-gradient">
-                    <img alt="conference room number <%= booking.room.number %>" class="w-100" src="<%= asset_path("480/#{booking.room.picture}", type: :image) %>"/>
-                    <div class="card-img-overlay-bottom">
-                      <div class="media text-sm text-white align-items-center">
-                        <% unless booking.user.picture.attached? %>
-                          <%= image_tag("100/avatar_default.png", :class =>"rounded-circle img-thumbnail w-25 mr-2", :alt => " #{booking.user.nickname} ")%>
-                        <% else %>  
-                          <%= image_tag(booking.user.thumbnail, :class =>"rounded-circle img-thumbnail mr-2", :alt => " #{booking.user.nickname} ") %>
-                        <% end %>
-                        <div class="media-body"><%= booking.user.nickname %></div>
-                      </div>
-                    </div>
-                  </div>
-                  <dl class="card-body" >
-                    <dt class="card-title"><%= booking.agenda %></dt>
-                    <dd>Date:  <%= booking.date.to_formatted_s(:long_ordinal) %></dd>
-                    <dd>Time:  <%= booking.start_time.to_formatted_s(:time) %> - <%= booking.end_time.to_formatted_s(:time)%></dd>
-                    <dd><%= link_to('View more', '#', :class => 'btn btn-secondary') %></dd>
-                  </dl>
-                </div>
-              <% end %>
+              <%= show_bookings(@bookings) %>
             </div>
             <div class="position-absolute px-2 px-sm-3 px-lg-2 px-xl-3" style="left: 0; top: 0; bottom:0; background: linear-gradient(to right, rgb(255, 255, 255, 1), rgba(255,255,255,0));"></div>
             <div class="position-absolute px-2 px-sm-3 px-lg-2 px-xl-3" style="right: 0; top: 0; bottom:0; background: linear-gradient(to left, rgb(255, 255, 255, 1), rgba(255,255,255,0));"></div>
