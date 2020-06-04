@@ -2,7 +2,7 @@ module WelcomeHelper
 
     def show_bookings(object)
         render(
-            :partial => 'welcome/bookings',
+            :partial => 'bookings',
             :locals => { :object => object }
         )
     end

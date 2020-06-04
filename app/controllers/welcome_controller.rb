@@ -12,7 +12,7 @@ class WelcomeController < ApplicationController
 
     respond_to do |format|
       format.js
-      format.json { render json: @bookings, status: :created, location: @bookings }
+      format.json { render json: @bookings }
     end 
 
     
