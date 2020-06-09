@@ -3,7 +3,7 @@ class WelcomeController < ApplicationController
   before_action :get_data, :only => [:index, :search_booking]
 
   def index
-    @bookings = Booking.all
+    
   end
   
   def search_booking
@@ -12,7 +12,6 @@ class WelcomeController < ApplicationController
 
     respond_to do |format|
       format.js
-      format.json { render json: @bookings }
     end 
 
     

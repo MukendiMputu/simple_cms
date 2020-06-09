@@ -1,5 +1,5 @@
 
-<% unless @bookings.any? %>
+<% if @bookings.any? %>
     <% @bookings.each do |booking| %>
         <div class="card mb-3 mx-3 shadow-sm" >
             <div class="card-img-top position-relative dark-gradient">
