@@ -72,6 +72,14 @@
                 
                 %>
                 <p><%= link_to("Add new booking", "#")%></p>
+                <div>
+                    <%= form_with model: @booking do |f| %>
+                        <%= f.text_field :agenda, class: "form-control my-3" %>
+                        <%= f.text_field :start_time, class: "form-control my-3"  %>
+                        <%= f.text_field :end_time, class: "form-control my-3"  %>
+                        <%= f.submit "Save" %>
+                    <% end %>
+                </div>
                 <% @user.bookings.each do |booking| %>
                     <div class="card" aria-label="room thumbnail">
                         <div class="room_thumbnail booking-thumbnail">
