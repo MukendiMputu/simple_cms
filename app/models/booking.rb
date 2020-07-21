@@ -7,7 +7,6 @@ class Booking < ApplicationRecord
     has_many :guests, :through => :invitations
 
     # Quick SQL Queries
-    scope :order_by_end, lambda { order("end_time ASC") }
     scope :oldest_first, lambda { order("created_at ASC") }
     scope :newest_first, lambda { order("created_at DESC") }
     scope :order_by_start, lambda { order("start_time ASC") }
