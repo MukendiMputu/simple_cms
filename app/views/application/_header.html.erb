@@ -71,7 +71,7 @@
                     <% end %>
                     <%= form_with(:url => '/login', :method => 'post', :class => '') do |form| %>
                     <%= form.label(:email, :class => 'sr-only')%>
-                    <div class="input-group  mr-sm-2">
+                    <div class="input-group  mr-sm-2 mb-2">
                         <%= form.email_field(:email, placeholder: "e.g. name@address.com", :class => 'form-control')%>
                         <div class="input-group-append">
                           <div class="input-group-text">@</div>
@@ -79,15 +79,15 @@
                     </div>
                     <%= form.label(:password, :class => 'sr-only')%>
                     <%= form.password_field(:password, placeholder: "Enter your password", :class => 'form-control  mr-sm-2')%>
-                    <div class="form-check  mr-sm-2">
+                    <div class="form-check  mr-sm-2 my-3">
                       <%= form.check_box(:ckeckBox, :class => 'form-check-input') %>
-                      <%= form.label(:checkBox, 'Remember me', :class => 'form-check-label text-light')%>
+                      <%= form.label(:checkBox, 'Remember me', :class => 'form-check-label text-dark')%>
                     </div>
-                    <%= form.submit('Sign in', :class => 'btn btn-light ') %>
+                    <%= form.submit('Sign in', :class => 'btn btn-primary ') %>
                     <% end %>
                   </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                   </div>
                 </div>
               </div>
