@@ -15,5 +15,10 @@ module SimpleCms
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
+
+
+    # Allow requests from subdomains like `www.product.com` and
+    # `beta1.product.com`.
+    config.hosts << "www.archmukki-localnet.de"
   end
 end
