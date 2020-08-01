@@ -28,7 +28,9 @@ class UsersController < ApplicationController
       flash[:notice] = "Account updated successfully."
       redirect_to(:action => 'show', :id => params[:id])
     else
-      render(:template => 'edit')
+      respond_to do |format|
+      format.js
+    end 
     end
   end
 
