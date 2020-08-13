@@ -29,14 +29,14 @@
             <% 
                 #Todo implement toggle behaviour
             %>
-            <%= link_to "Edit profile", remote: true, :class => "mt-3 mb-3 w-100 btn btn-link" %>
+            <button class="mt-3 mb-3 w-100 btn btn-light" onclick="$('#editDiv').toggle();">Edit profile</button>
         </div>
         <div id="uf-ID" class="float-left d-block">
             <h1><%= @user.first_name%> <%= @user.last_name %></h1>
             <h2><%= @user.nickname %></h2>
             <p><%= @user.email %></p>
         </div>
-        <div id="editDiv" class=" d-block">
+        <div id="editDiv" class="">
             <%= form_with model: @user,  class: "form-validate", method: "patch"  do |f| %>
                 <%= f.text_field :first_name, class: "form-control my-3" %>
                 <%= f.text_field :last_name, class: "form-control my-3"  %>
