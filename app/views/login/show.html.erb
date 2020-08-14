@@ -33,7 +33,7 @@
             <h2><%= @user.nickname %></h2>
             <p><%= @user.email %></p>
         </div>
-        <div id="editDiv" class="" >
+        <div id="editDiv" style="display: none;">
             <%= form_with url: edit_user_path, model: @user,  class: "form-validate", method: "post"  do |f| %>
                 <%= f.text_field :first_name, class: "form-control my-3" %>
                 <%= f.text_field :last_name, class: "form-control my-3"  %>
