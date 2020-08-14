@@ -26,7 +26,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     if @user.update(params.require(:user).permit(:first_name, :last_name, :nickname, :email, :password))
       flash[:notice] = "Account updated successfully."
-      redirect_to(:action => 'show', :id => params[:id])
+      redirect_to(:controller => 'login', :action => 'show', :id => params[:id])
     else
       respond_to do |format|
       format.js

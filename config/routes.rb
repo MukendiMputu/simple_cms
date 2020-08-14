@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :users, :only => [:new, :create, :edit, :destroy] do # :except => [:index, :new]
     member do
       get :delete
+      post :edit
     end
     
     collection do
