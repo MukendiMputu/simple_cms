@@ -26,6 +26,7 @@
                 <%= image_tag("640/avatar_default.png", :class =>"img_widget w-100 h-auto", :alt => "avatar default picture")%>
             <% end %>
             <br/>
+            <% # OPTIMIZE make button disappear when toggling%>
             <button class="mt-3 mb-3 w-100 btn btn-light" onclick="$('#editDiv').toggle();">Edit profile</button>
         </div>
         <div id="uf-ID" class="float-left d-block">
@@ -62,44 +63,52 @@
         <div class="tab-content">
             <section id="my_bookings" class="tab-pane fade show active" aria-label="my bookings">
                 <h2>My <%= pluralize( @user.bookings.size ,"Event") %></h2>
-                <% 
-
-                    #Todo implement correct target for link
-
-                %>
                 <button class="mt-3 mb-3 w-100 btn btn-link" onclick="$('#addBooking').toggle();">Add new booking</button>
-                <div id="addBooking" style="display:none;">
+                <div id="addBooking" style="display:none;" class="mb-3">
                     <%= form_with model: @booking do |f| %>
                         <%= f.text_field :agenda, class: "form-control my-3" %>
                         <%= f.text_field :start_time, class: "form-control my-3"  %>
                         <%= f.text_field :end_time, class: "form-control my-3"  %>
+                        
+                        <% #  TODO implement save button %>
+
                         <%= f.submit "Save" %>
                     <% end %>
                 </div>
                 <% @user.bookings.each do |booking| %>
-                    <div class="card" aria-label="room thumbnail">
-                        <div class="room_thumbnail booking-thumbnail">
-                        <%= image_tag("480/#{booking.room.picture}", :class =>"img_widget", :alt => "avatar default picture")%>
+                    <div class="card mb-3" aria-label="room thumbnail">
+                        <div class="row no-gutters">
+                            <div class="col-md-4">
+                                <%= image_tag("480/#{booking.room.picture}", :class =>"card-img", :alt => "avatar default picture")%>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title"><%= booking.agenda %></h5>
+                                    <p class="card-text mb-1">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                    <p class="card-text mb-0"><small class="text-muted">Date: <%= booking.date.to_formatted_s(:long_ordinal) %></small></p>
+                                    <p class="card-text mb-0"><small class="text-muted">Time: <%= booking.start_time.to_formatted_s(:time) %> - <%= booking.end_time.to_formatted_s(:time) %></small></p>
+                                </div>
+                            </div>
                         </div>
-                        <span><%= booking.room.name %></span>
                     </div>
                     <p class=" float-right"><%= link_to("edit booking", "#") %></p>
                     <div class="ovPanelText booking-form" aria-label="booking details">
-                        <h3><%= booking.agenda %></h3>
-                        <span>Date: <%= booking.date.to_formatted_s(:long_ordinal) %> </span><br/>
-                        <span>Time: <%= booking.start_time.to_formatted_s(:time) %> - <%= booking.end_time.to_formatted_s(:time) %> </span>
                         <br/><br/><strong>Notes:</strong><br/>
                         <% booking.notes.each do |note| %>
-                            <p class="note_bubble"><%= note.content %></p>
-                            <% 
-                            
-                                #Todo implement correct target for link 
-                            
-                            %>
-                            <%= link_to("edit note", "#") %><br/>
+                            <%= form_with model: @note do |f| %>
+                                <%= f.text_area :content, 
+                                    :class => "form-control my-3", 
+                                    :readonly => "true", 
+                                    :value => "#{ note.content }",
+                                    :rows => "6"
+                                %>
+                                <%= f.submit "Save", style: "display:none;"%>
+                            <% end %>
                         <% end %>
+                        <% # TODO add button for adding notes %>
                         <p style="color:#452113;"><%= link_to("Add note", '#', :class => 'add_note') %></p>
                     </div>
+                    <hr class="">
                 <% end %>
             </section>
             <section id="my_invitation" class="tab-pane fade" role="tabpanel" aria-labelledby="invitation-tab">
@@ -128,7 +137,7 @@
             </section>
             <% 
             
-                #Todo implement correct query for messages
+                # TODO implement correct query for messages
             
             %>
             <section id="my_msgt" class="tab-pane fade" role="tabpanel" aria-labelledby="message-tab">
