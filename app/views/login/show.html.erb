@@ -96,11 +96,14 @@
                         <br/><br/><strong>Notes:</strong><br/>
                         <% booking.notes.each do |note| %>
                             <%= form_with model: @note do |f| %>
+                                <div class="bd-clipboard">
+                                    <button type="button" class="btn btn-light" title="" data-original-title="Edit note">Edit</button>
+                                </div>
                                 <%= f.text_area :content, 
-                                    :class => "form-control my-3", 
+                                    :class => "md-textarea form-control my-3", 
                                     :readonly => "true", 
                                     :value => "#{ note.content }",
-                                    :rows => "6"
+                                    :size => "50x6"
                                 %>
                                 <%= f.submit "Save", style: "display:none;"%>
                             <% end %>
