@@ -1,3 +1,33 @@
 // Place all the styles related to the login controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+$white: #fff;
+
+.bd-clipboard {
+  position: relative;
+  display: none;
+  float: right;
+
+  + .highlight {
+    margin-top: 0;
+  }
+
+}
+
+.btn-clipboard {
+  position: absolute;
+  top: .5rem;
+  right: .5rem;
+  z-index: 10;
+  display: block;
+  padding: .25rem .5rem;
+  color: #818a91;
+  background-color: transparent;
+  border: 0;
+
+  &:hover {
+    color: $white;
+    background-color: #027de7;
+  }
+}
