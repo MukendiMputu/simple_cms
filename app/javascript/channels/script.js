@@ -1,6 +1,7 @@
 // Quick summary of the steps to do for implementing a
 // basic AJAX-Request.
 
+// Variable to hold the object
 var data;
 
 // 1. 
