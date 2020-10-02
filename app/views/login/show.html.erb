@@ -109,7 +109,7 @@
                             <% end %>
                         <% end %>
                         <% # TODO add button for adding notes %>
-                        <p style="color:#452113;"><%= link_to("Add note", '#', :class => 'add_note') %></p>
+                        <p style="color:#452113;"><%= link_to("Add note", '#', :class => 'add_note', :onclick => "$('#editDiv').toggle();") %></p>
                     </div>
                     <hr class="">
                 <% end %>
