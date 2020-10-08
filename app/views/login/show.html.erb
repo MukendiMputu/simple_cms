@@ -6,18 +6,27 @@
 
     <!-- FLASH NOTIFICATIONS -->
     <% if !flash[:notice].blank? %>
-        <div class = "alert alert-success" role="alert" aria-label="application notification message">
+        <div class = "alert alert-success alert-dismissible fade show" role="alert" aria-label="application notification message">
             <%= flash[:notice] %>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
         </div>
     <% end %>
     <% if !flash[:error].blank? %>
-    <div class = "alert alert-error" role="alert" aria-label="application error message">
+    <div class = "alert alert-error alert-dismissible fade show" role="alert" aria-label="application error message">
         <%= flash[:error] %>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
     </div>
     <% end %>
     <% if !flash[:alert].blank? %>
-    <div class = "alert alert-warning" role="alert" aria-label="application alert message">
+    <div class = "alert alert-warning alert-dismissible fade show" role="alert" aria-label="application alert message">
         <%= flash[:alert] %>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
     </div>
     <% end %>
     <!-- END OF FLASH NOTIFICATIONS -->
