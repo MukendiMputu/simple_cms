@@ -42,6 +42,8 @@ gem 'bootsnap', '>= 1.4.2', require: false
 
 
 gem "activesupport", ">= 6.0.3.1"
+gem "actionview", ">= 6.0.3.3"
+
 
 
 group :development, :test do
