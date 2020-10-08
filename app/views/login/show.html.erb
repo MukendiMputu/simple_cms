@@ -6,17 +6,17 @@
 
     <!-- FLASH NOTIFICATIONS -->
     <% if !flash[:notice].blank? %>
-        <div class = "notice" role="alert" aria-label="application notification message">
+        <div class = "alert alert-success" role="alert" aria-label="application notification message">
             <%= flash[:notice] %>
         </div>
     <% end %>
     <% if !flash[:error].blank? %>
-    <div class = "error" role="alert" aria-label="application error message">
+    <div class = "alert alert-error" role="alert" aria-label="application error message">
         <%= flash[:error] %>
     </div>
     <% end %>
     <% if !flash[:alert].blank? %>
-    <div class = "alert" role="alert" aria-label="application alert message">
+    <div class = "alert alert-warning" role="alert" aria-label="application alert message">
         <%= flash[:alert] %>
     </div>
     <% end %>
