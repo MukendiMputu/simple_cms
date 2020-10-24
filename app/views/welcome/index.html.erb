@@ -18,7 +18,7 @@
       
         <section id="main_pane" class="">
           <div id="mp_titel" class="mt-5 mb-5" >
-            <p class="mb-0 text-uppercase text-monospace font-weight-bold text-primary">Speak or teach like a Pro</p>
+            <p class="mb-0 text-uppercase text-monospace font-weight-bold text-primary">Speak and teach like a Pro</p>
             <h2>Our Rooms</h2>
           </div>
 
@@ -37,7 +37,7 @@
                   <br/><span>Configuration:  <%= room.configuration %></span>
                   <br/><span>Capacity:  <%= room.capacity %></span>
                   </p>
-                  <%= link_to('View more', '#', :class => 'btn btn-secondary') %>
+                  <%= link_to('View more', rooms_show_path(room.id), :class => 'btn btn-secondary') %>
                 </div>
               </div>
               <% end %>
