@@ -1,10 +1,10 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.7.1'
+ruby '>=2.7'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 6.0.2', '>= 6.0.2.2'
+gem 'rails', '~> 6.1'
 # Use mysql as the database for Active Record
 gem 'mysql2', '>= 0.4.4'
 # Use Puma as the app server
@@ -39,9 +39,10 @@ gem "google-cloud-storage", "~> 1.11", require: false
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
 
+# ExecJS lets you run JavaScript code from Ruby
+gem 'execjs', '~> 2.7'
 
-
-gem "activesupport", ">= 6.0.3.1"
+gem 'activesupport', '~> 6.1'
 
 
 group :development, :test do
